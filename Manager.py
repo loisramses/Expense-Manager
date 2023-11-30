@@ -1,6 +1,7 @@
 import tkcalendar as tkCal
 import openpyxl as xlrw
 import tkinter as tk
+import AddExpense as addFrame
 import os
 from tkinter import messagebox
 from openpyxl.styles import Font
@@ -15,10 +16,11 @@ class MyGUI:
         self.root.geometry("1200x700")
 
         self.folder_path = './expenses/'
+        self.performing_operation = False
 
         self.cell_font = Font(name='Calibri', size=11, bold=True)
 
-        self.setup_inputFrame()
+        # self.setup_inputFrame()
         self.setup_excelExplorerFrame()
 
         self.root.protocol("WM_DELETE_WINDOW", self.on_closing)
@@ -89,13 +91,17 @@ class MyGUI:
         self.populate_expensesTree()
         self.expense_treeList.grid(row=1, column=0, rowspan=3, columnspan=2, padx=5, pady=5, sticky=tk.NSEW)
 
+        # add button
+        self.add_button = tk.Button(self.excel_explorerFrame, text="Add Expense", bg='light green', font=('Arial', 9), width=13, command=self.add_dataToExcel)
+        self.add_button.grid(row=1, column=2, padx=5, pady=5, sticky=tk.EW)
+
         # edit button
         self.edit_button = tk.Button(self.excel_explorerFrame, text="Edit Selection", bg='light blue', font=('Arial', 9), command=self.edit_selection)
-        self.edit_button.grid(row=1, column=2, padx=5, pady=5, sticky=tk.EW)
+        self.edit_button.grid(row=2, column=2, padx=5, pady=5, sticky=tk.EW)
 
         # delete button
         self.delete_button = tk.Button(self.excel_explorerFrame, text="Delete Selection", bg='red', font=('Arial', 9), command=self.delete_selection)
-        self.delete_button.grid(row=2, column=2, padx=5, pady=5, sticky=tk.EW)
+        self.delete_button.grid(row=3, column=2, padx=5, pady=5, sticky=tk.EW)
 
         self.excel_explorerFrame.pack()
 
@@ -144,22 +150,31 @@ class MyGUI:
 
         self.expenses_data.append(row)
         self.save_workbook(self.folder_path + self.year_boxlist.get())
-        # self.workbook.save(self.folder_path + self.year_boxlist.get())
         self.row_nmb += 1
+        self.populate_expensesTree()
 
     def add_dataToExcel(self):
-        date = self.date_inputCal.selection_get().strftime("%d/%m/%Y")
-        ammount = self.ammount_input.get('1.0', tk.END).strip()
-        purpose = self.purpose_input.get('1.0', tk.END).strip()
-        description = self.description_input.get('1.0', tk.END).strip()
+        self.perform_op()
+        addFrame.AddExpense(self)
+        # self.finish_op()
+        # row = self.add_box.get_new_row()
+        # print(row)
+        # if row is not None:
+        #     print(self.add_box.get_new_row())
+        #     self.add_row_to_current_sheet(row)
+        #     self.populate_expensesTree()
+        # date = self.date_inputCal.selection_get().strftime("%d/%m/%Y")
+        # ammount = self.ammount_input.get('1.0', tk.END).strip()
+        # purpose = self.purpose_input.get('1.0', tk.END).strip()
+        # description = self.description_input.get('1.0', tk.END).strip()
 
-        if date == '' or ammount == '' or purpose == '' or description == '':
-            messagebox.showwarning("Missing Parameters", "There are empty parameters, cannot perform operation!")
-        else:
-            row = (date, ammount, purpose, description)
-            if not messagebox.askyesno("Confirm expense", "Are you sure you want to add this expense?"): return
-            self.add_row_to_current_sheet(row)
-            self.populate_expensesTree()
+        # if date == '' or ammount == '' or purpose == '' or description == '':
+        #     messagebox.showwarning("Missing Parameters", "There are empty parameters, cannot perform operation!")
+        # else:
+        #     row = (date, ammount, purpose, description)
+        #     if not messagebox.askyesno("Confirm expense", "Are you sure you want to add this expense?"): return
+        #     self.add_row_to_current_sheet(row)
+        #     self.populate_expensesTree()
 
     # falta ainda editar realmente as coisas
     def edit_selection(self):
@@ -241,8 +256,15 @@ class MyGUI:
         self.purpose_input.delete('1.0', tk.END)
         self.description_input.delete('1.0', tk.END)
 
+    def perform_op(self):
+        self.performing_operation = True
+
+    def finish_op(self):
+        self.performing_operation = False
+
     def on_closing(self):
-        self.workbook.close()
-        self.root.destroy()
+        if not self.performing_operation:
+            self.workbook.close()
+            self.root.destroy()
 
 MyGUI()
