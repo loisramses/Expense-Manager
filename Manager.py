@@ -22,7 +22,7 @@ class Manager:
         self.button_font = ('Arial', 9)
         self.cell_font = Font(name='Calibri', size=11, bold=True)
         self.number_format_str = '#,##0.00 €; [Red]-#,##0.00 €'
-        self.categories_list = ['Education', 'Food', 'Health', 'Investments', 'Leisure', 'Shopping', 'Transportation', 'Travel', 'Other']
+        self.categories_list = ['Education', 'Food', 'Health', 'Income', 'Investments', 'Leisure', 'Shopping', 'Transportation', 'Travel', 'Other']
         # self.categories_list = ['Alimentação', 'Compras', 'Educação', 'Investimentos', 'Lazer', 'Saúde', 'Transportes', 'Viagens', 'Outro']
 
         self.setup_menubar()
@@ -109,7 +109,7 @@ class Manager:
         self.current_sheet = self.get_current_sheet()
         self.expenses_data = []
         for row in self.current_sheet.iter_rows(max_row=self.current_sheet.max_row, max_col=5, values_only=True):
-            if (None not in row):
+            if row[0] is not None:
                 if type(row[0]) is not str: # to ignore the first row
                     row = (row[0].strftime("%d/%m/%Y"), row[1], row[2], row[3], row[4])
                 self.expenses_data.append(row)
