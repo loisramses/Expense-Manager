@@ -22,13 +22,13 @@ class AddYear:
         # name input
         self.name_label = tk.Label(self.input_frame, text='Year: ', font=self.manager.main_font)
         self.name_label.grid(row=0, column=0, sticky=tk.EW)
-        self.name_input = tk.Text(self.input_frame, height=1, width=2)
+        self.name_input = tk.Text(self.input_frame, wrap=tk.WORD, height=1, width=2)
         self.name_input.grid(row=0, column=1, sticky=tk.EW)
 
         # month input
         self.month_label = tk.Label(self.input_frame, text='Month: ', font=self.manager.main_font)
         self.month_label.grid(row=1, column=0, sticky=tk.EW)
-        self.month_input = tk.Text(self.input_frame, height=1, width=2)
+        self.month_input = tk.Text(self.input_frame, wrap=tk.WORD, height=1, width=2)
         self.month_input.grid(row=1, column=1, sticky=tk.EW)
 
         # initial date input
@@ -40,7 +40,7 @@ class AddYear:
         # initial ammount input
         self.ammount_label = tk.Label(self.input_frame, text="Initial Ammount: ", font=self.manager.main_font)
         self.ammount_label.grid(row=3, column=0, sticky=tk.EW)
-        self.ammount_input = tk.Text(self.input_frame,height=1, width=2)
+        self.ammount_input = tk.Text(self.input_frame, wrap=tk.WORD, height=1, width=2)
         self.ammount_input.grid(row=3, column=1, sticky=tk.EW)
 
         # add button

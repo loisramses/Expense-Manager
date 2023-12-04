@@ -22,6 +22,8 @@ class Manager:
         self.button_font = ('Arial', 9)
         self.cell_font = Font(name='Calibri', size=11, bold=True)
         self.number_format_str = '#,##0.00 €; [Red]-#,##0.00 €'
+        self.categories_list = ['Education', 'Food', 'Health', 'Investments', 'Leisure', 'Shopping', 'Transportation', 'Travel', 'Other']
+        # self.categories_list = ['Alimentação', 'Compras', 'Educação', 'Investimentos', 'Lazer', 'Saúde', 'Transportes', 'Viagens', 'Outro']
 
         self.setup_menubar()
         self.setup_excelExplorerFrame()
@@ -38,37 +40,36 @@ class Manager:
         self.year_boxlist = ttk.Combobox(self.excel_explorerFrame, value=self.books_names)
         self.year_boxlist.current(0)
         self.update_sheets(None)
-        self.year_boxlist.grid(row=0, column=0, sticky=tk.EW, padx=5, pady=5)
+        self.year_boxlist.grid(row=0, column=0, padx=5, pady=5, sticky=tk.EW)
         self.year_boxlist.bind("<<ComboboxSelected>>", self.update_sheets)
 
         self.month_boxlist = ttk.Combobox(self.excel_explorerFrame, value=self.sheet_names)
         self.month_boxlist.current(0)
-        self.month_boxlist.grid(row=0, column=1, sticky=tk.EW, padx=5, pady=5)
+        self.month_boxlist.grid(row=0, column=1, padx=5, pady=5, sticky=tk.EW)
         self.month_boxlist.bind("<<ComboboxSelected>>", self.update_expenses)
-
-        self.sheet_
 
         self.update_expenses(None)
         self.expense_treeList = ttk.Treeview(self.excel_explorerFrame, columns=self.expenses_data[0], show='headings')
-        for col in self.expenses_data[0]: self.expense_treeList.heading(col, text=col, anchor=tk.CENTER)
+        for i in range(0, 5): self.expense_treeList.column(i, anchor=tk.CENTER)
+        for col in self.expenses_data[0]: self.expense_treeList.heading(col, text=col)
         self.populate_expensesTree()
-        self.expense_treeList.grid(row=1, column=1, rowspan=4, columnspan=2, padx=5, pady=5, sticky=tk.NSEW)
+        self.expense_treeList.grid(row=1, column=0, rowspan=4, columnspan=2, padx=5, pady=5, sticky=tk.NSEW)
 
         # add expense button
         self.add_button = tk.Button(self.excel_explorerFrame, text="Add Expense", bg='firebrick2', font=('Arial', 9), width=13, command=self.add_expenseToExcel)
-        self.add_button.grid(row=1, column=3, padx=5, pady=5, sticky=tk.EW)
+        self.add_button.grid(row=1, column=2, padx=5, pady=5, sticky=tk.EW)
 
         # add revenue button
         self.add_button = tk.Button(self.excel_explorerFrame, text="Add Revenue", bg='green2', font=('Arial', 9), width=13, command=self.add_revenueToExcel)
-        self.add_button.grid(row=2, column=3, padx=5, pady=5, sticky=tk.EW)
+        self.add_button.grid(row=2, column=2, padx=5, pady=5, sticky=tk.EW)
 
         # edit button
         self.edit_button = tk.Button(self.excel_explorerFrame, text="Edit", bg='light blue', font=('Arial', 9), command=self.edit_data)
-        self.edit_button.grid(row=3, column=3, padx=5, pady=5, sticky=tk.EW)
+        self.edit_button.grid(row=3, column=2, padx=5, pady=5, sticky=tk.EW)
 
         # delete button
         self.delete_button = tk.Button(self.excel_explorerFrame, text="Delete Selection", bg='red2', font=('Arial', 9), command=self.delete_selection)
-        self.delete_button.grid(row=4, column=3, padx=5, pady=5, sticky=tk.EW)
+        self.delete_button.grid(row=4, column=2, padx=5, pady=5, sticky=tk.EW)
 
         self.excel_explorerFrame.pack()
 
@@ -78,7 +79,6 @@ class Manager:
         self.file_menu = tk.Menu(self.menubar, tearoff=0)
         self.file_menu.add_command(label="Create Year", command=self.add_year)
         self.file_menu.add_command(label="Create Month", command=self.on_closing)
-        self.file_menu.add_command(label="Save", command=self.on_closing)
         self.file_menu.add_command(label="Close", command=self.on_closing)
         self.menubar.add_cascade(menu=self.file_menu, label="File")
 
@@ -108,10 +108,10 @@ class Manager:
             self.save_workbook(self.folder_path + self.year_boxlist.get()) # save information when changing worksheets
         self.current_sheet = self.get_current_sheet()
         self.expenses_data = []
-        for row in self.current_sheet.iter_rows(max_row=self.current_sheet.max_row, max_col=4, values_only=True):
+        for row in self.current_sheet.iter_rows(max_row=self.current_sheet.max_row, max_col=5, values_only=True):
             if (None not in row):
                 if type(row[0]) is not str: # to ignore the first row
-                    row = (row[0].strftime("%d/%m/%Y"), row[1], row[2], row[3])
+                    row = (row[0].strftime("%d/%m/%Y"), row[1], row[2], row[3], row[4])
                 self.expenses_data.append(row)
                 self.row_nmb += 1
         self.populate_expensesTree()
@@ -193,6 +193,7 @@ class Manager:
             return
         self.current_sheet.cell(row=self.row_nmb+1, column=3, value=str(row[2]))
         self.current_sheet.cell(row=self.row_nmb+1, column=4, value=str(row[3]))
+        self.current_sheet.cell(row=self.row_nmb+1, column=5, value=str(row[4]))
 
         self.expenses_data.append(row)
         self.save_workbook(self.folder_path + self.year_boxlist.get())
@@ -212,11 +213,14 @@ class Manager:
         ammount = row[1]
         purpose = row[2]
         description = row[3]
+        category = row[4]
+
         # update expense tree list
         self.expense_treeList.set(item=self.selection[0], column=0, value=date)
         self.expense_treeList.set(item=self.selection[0], column=1, value=ammount)
         self.expense_treeList.set(item=self.selection[0], column=2, value=purpose)
         self.expense_treeList.set(item=self.selection[0], column=3, value=description)
+        self.expense_treeList.set(item=self.selection[0], column=4, value=category)
 
         # update excel
         target_index = self.expense_treeList.index(self.selection[0])+2
@@ -228,6 +232,7 @@ class Manager:
             return
         self.current_sheet.cell(row=target_index, column=3, value=purpose)
         self.current_sheet.cell(row=target_index, column=4, value=description)
+        self.current_sheet.cell(row=target_index, column=5, value=category)
 
         self.save_workbook(self.folder_path + self.year_boxlist.get())
 
