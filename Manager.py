@@ -1,15 +1,15 @@
-import tkcalendar as tkCal
+import EditData as editFrame
+import AddData as addFrame
+import AddYear as addYear
 import openpyxl as xlrw
 import tkinter as tk
-import AddExpense as addFrame
 import os
-from tkinter import messagebox
 from openpyxl.styles import Font
-from datetime import datetime
+from tkinter import messagebox
 from datetime import date
 from tkinter import ttk
 
-class MyGUI:
+class Manager:
     def __init__(self):
         self.root = tk.Tk()
         self.root.title("Expense Manager")
@@ -18,92 +18,77 @@ class MyGUI:
         self.folder_path = './expenses/'
         self.performing_operation = False
 
+        self.main_font = ('Arial', 13)
+        self.button_font = ('Arial', 9)
         self.cell_font = Font(name='Calibri', size=11, bold=True)
+        self.number_format_str = '#,##0.00 €; [Red]-#,##0.00 €'
 
-        # self.setup_inputFrame()
+        self.setup_menubar()
         self.setup_excelExplorerFrame()
 
         self.root.protocol("WM_DELETE_WINDOW", self.on_closing)
 
         self.root.mainloop();
-    
-    def setup_inputFrame(self):
-        self.input_frame = tk.Frame(self.root)
-
-        self.input_frame.columnconfigure(0, weight=1)
-        self.input_frame.columnconfigure(1, weight=1)
-
-        # date input
-        self.date_label = tk.Label(self.input_frame, text="Date: ", font=('Arial', 13))
-        self.date_label.grid(row=0, column=0, sticky=tk.W+tk.E)
-        self.date_inputCal = tkCal.Calendar(self.input_frame, date_pattern='dd/mm/yyyy', firstweekday="sunday")
-        self.date_inputCal.grid(row=0, column=1, sticky=tk.W+tk.E)
-
-        # ammount input
-        self.ammount_label = tk.Label(self.input_frame, text="Ammount: ", font=('Arial', 13))
-        self.ammount_label.grid(row=1, column=0, sticky=tk.W+tk.E)
-        self.ammount_input = tk.Text(self.input_frame,height=1, width=2)
-        self.ammount_input.grid(row=1, column=1, sticky=tk.W+tk.E)
-
-        # purpose input
-        self.purpose_label = tk.Label(self.input_frame, text="Purpose: ", font=('Arial', 13))
-        self.purpose_label.grid(row=2, column=0, sticky=tk.W+tk.E)
-        self.purpose_input = tk.Text(self.input_frame,height=1, width=2)
-        self.purpose_input.grid(row=2, column=1, sticky=tk.W+tk.E)
-
-        # description input
-        self.description_label = tk.Label(self.input_frame, text="Description: ", font=('Arial', 13))
-        self.description_label.grid(row=3, column=0, sticky=tk.W+tk.E)
-        self.description_input = tk.Text(self.input_frame,height=3, width=2)
-        self.description_input.grid(row=3, column=1, sticky=tk.W+tk.E)
-
-        # add button
-        self.add_button = tk.Button(self.input_frame, text="Add Expense", bg='light green', font=('Arial', 9), width=13, command=self.add_dataToExcel)
-        self.add_button.grid(row=4, column=0)
-        
-        # clear button
-        self.clear_button = tk.Button(self.input_frame, text="Clear", bg='red', font=('Arial', 9), width=13, command=self.clear_data)
-        self.clear_button.grid(row=4, column=1)
-
-        self.input_frame.pack(pady=15)
 
     def setup_excelExplorerFrame(self):
         self.books_names = os.listdir("./expenses")
 
         self.excel_explorerFrame = tk.Frame(self.root)
-        self.excel_explorerFrame.columnconfigure(0, weight=1, pad=5)
-        self.excel_explorerFrame.columnconfigure(1, weight=1, pad=5)
 
         self.year_boxlist = ttk.Combobox(self.excel_explorerFrame, value=self.books_names)
         self.year_boxlist.current(0)
         self.update_sheets(None)
-        self.year_boxlist.grid(row=0, column=0, sticky=tk.E)
+        self.year_boxlist.grid(row=0, column=0, sticky=tk.EW, padx=5, pady=5)
         self.year_boxlist.bind("<<ComboboxSelected>>", self.update_sheets)
 
         self.month_boxlist = ttk.Combobox(self.excel_explorerFrame, value=self.sheet_names)
         self.month_boxlist.current(0)
-        self.month_boxlist.grid(row=0, column=1, sticky=tk.W)
+        self.month_boxlist.grid(row=0, column=1, sticky=tk.EW, padx=5, pady=5)
         self.month_boxlist.bind("<<ComboboxSelected>>", self.update_expenses)
+
+        self.sheet_
 
         self.update_expenses(None)
         self.expense_treeList = ttk.Treeview(self.excel_explorerFrame, columns=self.expenses_data[0], show='headings')
         for col in self.expenses_data[0]: self.expense_treeList.heading(col, text=col, anchor=tk.CENTER)
         self.populate_expensesTree()
-        self.expense_treeList.grid(row=1, column=0, rowspan=3, columnspan=2, padx=5, pady=5, sticky=tk.NSEW)
+        self.expense_treeList.grid(row=1, column=1, rowspan=4, columnspan=2, padx=5, pady=5, sticky=tk.NSEW)
 
-        # add button
-        self.add_button = tk.Button(self.excel_explorerFrame, text="Add Expense", bg='light green', font=('Arial', 9), width=13, command=self.add_dataToExcel)
-        self.add_button.grid(row=1, column=2, padx=5, pady=5, sticky=tk.EW)
+        # add expense button
+        self.add_button = tk.Button(self.excel_explorerFrame, text="Add Expense", bg='firebrick2', font=('Arial', 9), width=13, command=self.add_expenseToExcel)
+        self.add_button.grid(row=1, column=3, padx=5, pady=5, sticky=tk.EW)
+
+        # add revenue button
+        self.add_button = tk.Button(self.excel_explorerFrame, text="Add Revenue", bg='green2', font=('Arial', 9), width=13, command=self.add_revenueToExcel)
+        self.add_button.grid(row=2, column=3, padx=5, pady=5, sticky=tk.EW)
 
         # edit button
-        self.edit_button = tk.Button(self.excel_explorerFrame, text="Edit Selection", bg='light blue', font=('Arial', 9), command=self.edit_selection)
-        self.edit_button.grid(row=2, column=2, padx=5, pady=5, sticky=tk.EW)
+        self.edit_button = tk.Button(self.excel_explorerFrame, text="Edit", bg='light blue', font=('Arial', 9), command=self.edit_data)
+        self.edit_button.grid(row=3, column=3, padx=5, pady=5, sticky=tk.EW)
 
         # delete button
-        self.delete_button = tk.Button(self.excel_explorerFrame, text="Delete Selection", bg='red', font=('Arial', 9), command=self.delete_selection)
-        self.delete_button.grid(row=3, column=2, padx=5, pady=5, sticky=tk.EW)
+        self.delete_button = tk.Button(self.excel_explorerFrame, text="Delete Selection", bg='red2', font=('Arial', 9), command=self.delete_selection)
+        self.delete_button.grid(row=4, column=3, padx=5, pady=5, sticky=tk.EW)
 
         self.excel_explorerFrame.pack()
+
+    def setup_menubar(self):
+        self.menubar = tk.Menu(self.root)
+        
+        self.file_menu = tk.Menu(self.menubar, tearoff=0)
+        self.file_menu.add_command(label="Create Year", command=self.add_year)
+        self.file_menu.add_command(label="Create Month", command=self.on_closing)
+        self.file_menu.add_command(label="Save", command=self.on_closing)
+        self.file_menu.add_command(label="Close", command=self.on_closing)
+        self.menubar.add_cascade(menu=self.file_menu, label="File")
+
+        self.action_menu = tk.Menu(self.menubar, tearoff=0)
+        self.action_menu.add_command(label="Add Expense", command=self.add_expenseToExcel)
+        self.action_menu.add_command(label="Edit Expense", command=self.edit_data)
+        self.action_menu.add_command(label="Delete Expense(s)", command=self.delete_selection)
+        self.menubar.add_cascade(menu=self.action_menu, label="Action")
+
+        self.root.config(menu=self.menubar)
 
     def update_sheets(self, event):
         # close the previous book
@@ -123,7 +108,7 @@ class MyGUI:
             self.save_workbook(self.folder_path + self.year_boxlist.get()) # save information when changing worksheets
         self.current_sheet = self.get_current_sheet()
         self.expenses_data = []
-        for row in self.current_sheet.iter_rows(min_row=1, max_row=self.current_sheet.max_row, max_col=4, values_only=True):
+        for row in self.current_sheet.iter_rows(max_row=self.current_sheet.max_row, max_col=4, values_only=True):
             if (None not in row):
                 if type(row[0]) is not str: # to ignore the first row
                     row = (row[0].strftime("%d/%m/%Y"), row[1], row[2], row[3])
@@ -135,13 +120,74 @@ class MyGUI:
         if hasattr(self, 'expense_treeList'):
             for item in self.expense_treeList.get_children():
                 self.expense_treeList.delete(item)
-            for i, row in enumerate(self.expenses_data[1:]):
-                self.expense_treeList.insert("", i, values=row)
+            for row in self.expenses_data[1:]:
+                self.expense_treeList.insert("", 'end', values=row)
+
+    def create_workbook(self, info):
+        new_file_name = info['year_name'] + '.xlsx'
+
+        # create a new workbook, a new sheet and save it
+        self.workbook = xlrw.Workbook()
+        self.current_sheet = self.workbook.active
+        self.create_sheet(info)
+        self.workbook.save(self.folder_path + new_file_name)
+
+        # update workbook list
+        self.books_names = os.listdir('./expenses')
+        self.year_boxlist.config(values=self.books_names)
+        self.year_boxlist.current(self.books_names.index(new_file_name))
+
+        info.pop('year_name')
+        self.update_sheets(None)
+
+    def add_year(self):
+        self.perform_op()
+        addYear.AddYear(self)
+
+    def create_sheet(self, info):
+        self.current_sheet.title = info['month_name']
+
+        # insert col tags
+        self.current_sheet['A1'] = 'DATE'
+        self.current_sheet['A1'].font = self.cell_font
+        self.current_sheet['B1'] = 'AMOUNT'
+        self.current_sheet['B1'].font = self.cell_font
+        self.current_sheet['C1'] = 'PURPOSE'
+        self.current_sheet['C1'].font = self.cell_font
+        self.current_sheet['D1'] = 'DESCRIPTION'
+        self.current_sheet['D1'].font = self.cell_font
+
+        # insert dates
+        self.current_sheet['G1'] = 'Data início:'
+        self.current_sheet['G1'].font = self.cell_font
+        self.current_sheet['H1'] = info['init_date']
+        self.current_sheet['G2'] = 'Data fim:'
+        self.current_sheet['G2'].font = self.cell_font
+
+        # insert ammounts
+        self.current_sheet['G4'] = 'Montante inicial:'
+        self.current_sheet['G4'].font = self.cell_font
+        self.current_sheet['H4'] = float(info['init_ammount'])
+        self.current_sheet['H4'].number_format = self.number_format_str
+        self.current_sheet['G5'] = 'Montante final:'
+        self.current_sheet['G5'].font = self.cell_font
+        self.current_sheet['H5'] = '=(H4-H7)'
+        self.current_sheet['H5'].number_format = self.number_format_str
+
+        # total spent ammount
+        self.current_sheet['G7'] = 'Total gasto:'
+        self.current_sheet['G7'].font = self.cell_font
+        self.current_sheet['H7'] = '=SUM(B:B)'
+        self.current_sheet['H7'].number_format = self.number_format_str
+
+    def add_month(self):
+        pass
 
     def add_row_to_current_sheet(self, row):
+        # add row to excel
         self.current_sheet.cell(row=self.row_nmb+1, column=1, value=row[0])
         try:
-            self.current_sheet.cell(row=self.row_nmb+1, column=2, value=float(row[1])).number_format = '#,##0.00 €'
+            self.current_sheet.cell(row=self.row_nmb+1, column=2, value=float(row[1])).number_format = self.number_format_str
         except:
             messagebox.showwarning("Invalid number format", "The value must be seperated by \".\"!")
             return
@@ -153,57 +199,56 @@ class MyGUI:
         self.row_nmb += 1
         self.populate_expensesTree()
 
-    def add_dataToExcel(self):
+    def add_expenseToExcel(self):
         self.perform_op()
-        addFrame.AddExpense(self)
-        # self.finish_op()
-        # row = self.add_box.get_new_row()
-        # print(row)
-        # if row is not None:
-        #     print(self.add_box.get_new_row())
-        #     self.add_row_to_current_sheet(row)
-        #     self.populate_expensesTree()
-        # date = self.date_inputCal.selection_get().strftime("%d/%m/%Y")
-        # ammount = self.ammount_input.get('1.0', tk.END).strip()
-        # purpose = self.purpose_input.get('1.0', tk.END).strip()
-        # description = self.description_input.get('1.0', tk.END).strip()
+        addFrame.AddData(self, 'expense')
 
-        # if date == '' or ammount == '' or purpose == '' or description == '':
-        #     messagebox.showwarning("Missing Parameters", "There are empty parameters, cannot perform operation!")
-        # else:
-        #     row = (date, ammount, purpose, description)
-        #     if not messagebox.askyesno("Confirm expense", "Are you sure you want to add this expense?"): return
-        #     self.add_row_to_current_sheet(row)
-        #     self.populate_expensesTree()
+    def add_revenueToExcel(self):
+        self.perform_op()
+        addFrame.AddData(self, 'revenue')
 
-    # falta ainda editar realmente as coisas
-    def edit_selection(self):
-        selection = self.expense_treeList.selection()
-        selection_size = len(selection)
+    def edit_row_on_current_sheet(self, row):
+        date = row[0]
+        ammount = row[1]
+        purpose = row[2]
+        description = row[3]
+        # update expense tree list
+        self.expense_treeList.set(item=self.selection[0], column=0, value=date)
+        self.expense_treeList.set(item=self.selection[0], column=1, value=ammount)
+        self.expense_treeList.set(item=self.selection[0], column=2, value=purpose)
+        self.expense_treeList.set(item=self.selection[0], column=3, value=description)
+
+        # update excel
+        target_index = self.expense_treeList.index(self.selection[0])+2
+        self.current_sheet.cell(row=target_index, column=1, value=date)
+        try:
+            self.current_sheet.cell(row=target_index, column=2, value=float(ammount)).number_format = self.number_format_str
+        except:
+            messagebox.showwarning("Invalid number format", "The value must be seperated by \".\"!")
+            return
+        self.current_sheet.cell(row=target_index, column=3, value=purpose)
+        self.current_sheet.cell(row=target_index, column=4, value=description)
+
+        self.save_workbook(self.folder_path + self.year_boxlist.get())
+
+    def edit_data(self):
+        self.selection = self.expense_treeList.selection()
+        selection_size = len(self.selection)
         if selection_size == 0:
             messagebox.showwarning("Empty selection", "There are no items selected, cannot perform operation!")
             return
         if selection_size > 1:
             messagebox.showwarning("Too many items selected", "There are too many items selected, cannot perform operation! Edit can only be performed on one item.")
             return
-        
-        # set the data on the input frame
-        self.date_inputCal.selection_set(datetime.strptime(self.expense_treeList.item(selection[0])['values'][0], "%d/%m/%Y"))
-        self.ammount_input.replace('1.0', tk.END, self.expense_treeList.item(selection[0])['values'][1])
-        self.purpose_input.replace('1.0', tk.END, self.expense_treeList.item(selection[0])['values'][2])
-        self.description_input.replace('1.0', tk.END, self.expense_treeList.item(selection[0])['values'][3])
-
-        # print(self.expense_treeList.item(selection[0])['values'])
-        # print(datetime.strptime(self.expense_treeList.item(selection[0])['values'][0], "%d/%m/%Y"))
-        # print(len(selection))
-        # for row in selection:
-        #     print(row)
+        self.perform_op()
+        editFrame.EditExpense(self)
 
     def delete_selection(self):
         selection = self.expense_treeList.selection()
         selection_size = len(selection)
         if selection_size <= 0:
-            messagebox.showwarning("Empty selection", "There are no items selected, cannot perform operation!")        # selection = self.expense_treeList.selection()
+            messagebox.showwarning("Empty selection", "There are no items selected, cannot perform operation!")
+            return
         if messagebox.askyesno("Confirm deletion", "Are you sure you want to delete all the selected items? This will permanently delete the selected items!"):
             for row in selection:
                 self.current_sheet.delete_rows(self.expense_treeList.index(row)+2, 1) # +2 bc of header and index starts at 0
@@ -222,6 +267,9 @@ class MyGUI:
         return sheet
 
     def save_workbook(self, folder_path):
+        # clear old data
+        self.current_sheet.delete_cols(7, 2)
+
         # insert dates
         self.current_sheet['G1'] = 'Data início:'
         self.current_sheet['G1'].font = self.cell_font
@@ -234,18 +282,17 @@ class MyGUI:
         self.current_sheet['G4'] = 'Montante inicial:'
         self.current_sheet['G4'].font = self.cell_font
         self.current_sheet['H4'] = self.current_sheet_initial_ammount
-        self.current_sheet['H4'].number_format = '#,##0.00 €'
+        self.current_sheet['H4'].number_format = self.number_format_str
         self.current_sheet['G5'] = 'Montante final:'
         self.current_sheet['G5'].font = self.cell_font
         self.current_sheet['H5'] = '=(H4-H7)'
-        self.current_sheet['H5'].number_format = '#,##0.00 €'
+        self.current_sheet['H5'].number_format = self.number_format_str
 
         # total spent ammount
         self.current_sheet['G7'] = 'Total gasto:'
         self.current_sheet['G7'].font = self.cell_font
         self.current_sheet['H7'] = '=SUM(B:B)'
-        
-        self.current_sheet['H7'].number_format = '#,##0.00 €'
+        self.current_sheet['H7'].number_format = self.number_format_str
 
         self.workbook.save(self.folder_path + self.year_boxlist.get())
 
@@ -267,4 +314,4 @@ class MyGUI:
             self.workbook.close()
             self.root.destroy()
 
-MyGUI()
+Manager()
