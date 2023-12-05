@@ -1,12 +1,14 @@
 import tkcalendar as tkCal
 import tkinter as tk
+import Manager as mn
 from tkinter import messagebox
 from datetime import date
 from tkinter import ttk
 
 class AddData:
-    def __init__(self, manager, type_of_op):
-        self.text = 'Add Revenue' if type_of_op == 'revenue' else 'Add Expense'
+    def __init__(self, manager: mn.Manager, type_of_op):
+        self.type_of_op = type_of_op
+        self.text = 'Add Revenue' if self.type_of_op == 'revenue' else 'Add Expense'
         self.op_type = 1 if type_of_op == 'revenue' else -1
 
         self.manager = manager
@@ -17,8 +19,6 @@ class AddData:
         self.setup_inputFrame()
 
         self.root.protocol("WM_DELETE_WINDOW", self.on_closing)
-
-        self.root.mainloop()
 
     def setup_inputFrame(self):
         self.input_frame = tk.Frame(self.root)
@@ -50,7 +50,7 @@ class AddData:
         # category input
         self.category_label = tk.Label(self.input_frame, text="Category: ", font=self.manager.main_font)
         self.category_label.grid(row=4, column=0, sticky=tk.EW)
-        self.category_input = ttk.Combobox(self.input_frame, value=self.manager.categories_list)
+        self.category_input = ttk.Combobox(self.input_frame, value=self.manager.categories_list if self.type_of_op == 'expense' else self.manager.categories_list[3], state='readonly')
         self.category_input.current(0)
         self.category_input.grid(row=4, column=1, sticky=tk.EW)
 
@@ -79,8 +79,8 @@ class AddData:
             messagebox.showwarning("Missing Parameters", "There are empty parameters, cannot perform operation!")
         else:
             if not messagebox.askyesno("Confirm expense", "Are you sure you want to add this expense?"): return
-            new_row = (date, float(ammount)*self.op_type, purpose, description, category)
-            self.manager.add_row_to_current_sheet(new_row)
+            self.new_row = (date, float(ammount)*self.op_type, purpose, description, category)
+            self.manager.add_row_to_current_sheet(self.new_row)
             self.on_closing()
 
     def clear_data(self):
@@ -91,6 +91,13 @@ class AddData:
         self.description_input.delete('1.0', tk.END)
         self.category_input.current(0)
 
+    def run(self):
+        self.root.mainloop()
+
+    def stop(self):
+        self.root.quit()
+
     def on_closing(self):
         self.manager.finish_op()
+        self.stop()
         self.root.destroy()

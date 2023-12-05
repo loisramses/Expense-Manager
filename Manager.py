@@ -1,16 +1,6 @@
-import EditData as editFrame
-import AddData as addFrame
-import AddYear as addYear
-import openpyxl as xlrw
-import tkinter as tk
-import os
-from openpyxl.styles import Font
-from tkinter import messagebox
-from datetime import date
-from tkinter import ttk
-
 class Manager:
     def __init__(self):
+        self.log = []
         self.root = tk.Tk()
         self.root.title("Expense Manager")
         self.root.geometry("1200x700")
@@ -30,20 +20,39 @@ class Manager:
 
         self.root.protocol("WM_DELETE_WINDOW", self.on_closing)
 
-        self.root.mainloop();
+    def setup_menubar(self):
+        self.menubar = tk.Menu(self.root)
+        
+        self.file_menu = tk.Menu(self.menubar, tearoff=0)
+        self.file_menu.add_command(label="Create Year", command=self.add_year)
+        self.file_menu.add_command(label="Create Month", command=self.add_month)
+        self.file_menu.add_command(label="Edit Month", command=self.edit_month)
+        # self.file_menu.add_command(label="Delete Year", command=self.remove_year)
+        # self.file_menu.add_command(label="Delete Month", command=self.remove_month)
+        self.file_menu.add_command(label="Close", command=self.on_closing)
+        self.menubar.add_cascade(menu=self.file_menu, label="File")
+
+        self.action_menu = tk.Menu(self.menubar, tearoff=0)
+        self.action_menu.add_command(label="Add Expense", command=lambda: self.add_dataToExcel('expense'))
+        self.action_menu.add_command(label="Add Revenue", command=lambda: self.add_dataToExcel('revenue'))
+        self.action_menu.add_command(label="Edit Selection", command=self.edit_data)
+        self.action_menu.add_command(label="Delete Selection", command=self.delete_selection)
+        self.menubar.add_cascade(menu=self.action_menu, label="Action")
+
+        self.root.config(menu=self.menubar)
 
     def setup_excelExplorerFrame(self):
         self.books_names = os.listdir("./expenses")
 
         self.excel_explorerFrame = tk.Frame(self.root)
 
-        self.year_boxlist = ttk.Combobox(self.excel_explorerFrame, value=self.books_names)
+        self.year_boxlist = ttk.Combobox(self.excel_explorerFrame, value=self.books_names, state='readonly')
         self.year_boxlist.current(0)
         self.update_sheets(None)
         self.year_boxlist.grid(row=0, column=0, padx=5, pady=5, sticky=tk.EW)
         self.year_boxlist.bind("<<ComboboxSelected>>", self.update_sheets)
 
-        self.month_boxlist = ttk.Combobox(self.excel_explorerFrame, value=self.sheet_names)
+        self.month_boxlist = ttk.Combobox(self.excel_explorerFrame, value=self.sheet_names, state='readonly')
         self.month_boxlist.current(0)
         self.month_boxlist.grid(row=0, column=1, padx=5, pady=5, sticky=tk.EW)
         self.month_boxlist.bind("<<ComboboxSelected>>", self.update_expenses)
@@ -56,11 +65,11 @@ class Manager:
         self.expense_treeList.grid(row=1, column=0, rowspan=4, columnspan=2, padx=5, pady=5, sticky=tk.NSEW)
 
         # add expense button
-        self.add_button = tk.Button(self.excel_explorerFrame, text="Add Expense", bg='firebrick2', font=('Arial', 9), width=13, command=self.add_expenseToExcel)
+        self.add_button = tk.Button(self.excel_explorerFrame, text="Add Expense", bg='firebrick2', font=('Arial', 9), width=13, command=lambda: self.add_dataToExcel('expense'))
         self.add_button.grid(row=1, column=2, padx=5, pady=5, sticky=tk.EW)
 
         # add revenue button
-        self.add_button = tk.Button(self.excel_explorerFrame, text="Add Revenue", bg='green2', font=('Arial', 9), width=13, command=self.add_revenueToExcel)
+        self.add_button = tk.Button(self.excel_explorerFrame, text="Add Revenue", bg='green2', font=('Arial', 9), width=13, command=lambda: self.add_dataToExcel('revenue'))
         self.add_button.grid(row=2, column=2, padx=5, pady=5, sticky=tk.EW)
 
         # edit button
@@ -73,24 +82,7 @@ class Manager:
 
         self.excel_explorerFrame.pack()
 
-    def setup_menubar(self):
-        self.menubar = tk.Menu(self.root)
-        
-        self.file_menu = tk.Menu(self.menubar, tearoff=0)
-        self.file_menu.add_command(label="Create Year", command=self.add_year)
-        self.file_menu.add_command(label="Create Month", command=self.on_closing)
-        self.file_menu.add_command(label="Close", command=self.on_closing)
-        self.menubar.add_cascade(menu=self.file_menu, label="File")
-
-        self.action_menu = tk.Menu(self.menubar, tearoff=0)
-        self.action_menu.add_command(label="Add Expense", command=self.add_expenseToExcel)
-        self.action_menu.add_command(label="Edit Expense", command=self.edit_data)
-        self.action_menu.add_command(label="Delete Expense(s)", command=self.delete_selection)
-        self.menubar.add_cascade(menu=self.action_menu, label="Action")
-
-        self.root.config(menu=self.menubar)
-
-    def update_sheets(self, event):
+    def update_sheets(self, event, index=0):
         # close the previous book
         if hasattr(self, 'workbook'):
             self.workbook.close()
@@ -99,13 +91,13 @@ class Manager:
         self.sheet_names = self.workbook.sheetnames
         if hasattr(self, 'month_boxlist'):
             self.month_boxlist.config(value=self.sheet_names)
-            self.month_boxlist.current(0)
+            self.month_boxlist.current(index)
             self.update_expenses(None)
 
     def update_expenses(self, event):
         self.row_nmb = 0
         if hasattr(self, 'current_sheet'):
-            self.save_workbook(self.folder_path + self.year_boxlist.get()) # save information when changing worksheets
+            self.save_workbook() # save information when changing worksheets
         self.current_sheet = self.get_current_sheet()
         self.expenses_data = []
         for row in self.current_sheet.iter_rows(max_row=self.current_sheet.max_row, max_col=5, values_only=True):
@@ -124,27 +116,30 @@ class Manager:
                 self.expense_treeList.insert("", 'end', values=row)
 
     def create_workbook(self, info):
+        self.add_log(f'Creating workbook with name "{info["year_name"]}"')
+
         new_file_name = info['year_name'] + '.xlsx'
 
         # create a new workbook, a new sheet and save it
         self.workbook = xlrw.Workbook()
         self.current_sheet = self.workbook.active
-        self.create_sheet(info)
-        self.workbook.save(self.folder_path + new_file_name)
+        self.create_worksheet(info)
 
         # update workbook list
         self.books_names = os.listdir('./expenses')
         self.year_boxlist.config(values=self.books_names)
         self.year_boxlist.current(self.books_names.index(new_file_name))
 
-        info.pop('year_name')
         self.update_sheets(None)
 
     def add_year(self):
         self.perform_op()
-        addYear.AddYear(self)
+        year_frame = addYear.AddYear(self)
+        year_frame.run()
 
-    def create_sheet(self, info):
+    def create_worksheet(self, info):
+        self.add_log(f'Creating worksheet "{info["month_name"]}" with initial date "{info["init_date"]}" and initial amount "{info["init_ammount"]}" on current workbook "{info["year_name"]}"')
+
         self.current_sheet.title = info['month_name']
 
         # insert col tags
@@ -156,6 +151,8 @@ class Manager:
         self.current_sheet['C1'].font = self.cell_font
         self.current_sheet['D1'] = 'DESCRIPTION'
         self.current_sheet['D1'].font = self.cell_font
+        self.current_sheet['E1'] = 'CATEGORY'
+        self.current_sheet['E1'].font = self.cell_font
 
         # insert dates
         self.current_sheet['G1'] = 'Data início:'
@@ -180,8 +177,20 @@ class Manager:
         self.current_sheet['H7'] = '=SUM(B:B)'
         self.current_sheet['H7'].number_format = self.number_format_str
 
+        self.workbook.save(self.folder_path + info['year_name'])
+
     def add_month(self):
+        self.perform_op()
+        month_frame = addMonth.AddMonth(self)
+        month_frame.run()
+
+    def edit_current_sheet(self):
         pass
+
+    def edit_month(self):
+        self.perform_op()
+        editMonth_frame = editMonth.EditMonth(self)
+        editMonth_frame.run()
 
     def add_row_to_current_sheet(self, row):
         # add row to excel
@@ -196,17 +205,16 @@ class Manager:
         self.current_sheet.cell(row=self.row_nmb+1, column=5, value=str(row[4]))
 
         self.expenses_data.append(row)
-        self.save_workbook(self.folder_path + self.year_boxlist.get())
+        self.save_workbook()
         self.row_nmb += 1
         self.populate_expensesTree()
 
-    def add_expenseToExcel(self):
+    def add_dataToExcel(self, type_of_op):
         self.perform_op()
-        addFrame.AddData(self, 'expense')
-
-    def add_revenueToExcel(self):
-        self.perform_op()
-        addFrame.AddData(self, 'revenue')
+        add_frame = addFrame.AddData(self, type_of_op)
+        add_frame.run()
+        if hasattr(add_frame, 'new_row'):
+            self.add_log(f'Added "{type_of_op}" with data {add_frame.new_row}')
 
     def edit_row_on_current_sheet(self, row):
         date = row[0]
@@ -234,7 +242,7 @@ class Manager:
         self.current_sheet.cell(row=target_index, column=4, value=description)
         self.current_sheet.cell(row=target_index, column=5, value=category)
 
-        self.save_workbook(self.folder_path + self.year_boxlist.get())
+        self.save_workbook()
 
     def edit_data(self):
         self.selection = self.expense_treeList.selection()
@@ -246,7 +254,8 @@ class Manager:
             messagebox.showwarning("Too many items selected", "There are too many items selected, cannot perform operation! Edit can only be performed on one item.")
             return
         self.perform_op()
-        editFrame.EditExpense(self)
+        edit_frame = editFrame.EditExpense(self)
+        edit_frame.run()
 
     def delete_selection(self):
         selection = self.expense_treeList.selection()
@@ -262,7 +271,7 @@ class Manager:
 
             self.update_expenses(None)
             self.populate_expensesTree()
-            self.save_workbook(self.folder_path + self.year_boxlist.get())
+            self.save_workbook()
 
     def get_current_sheet(self):
         sheet = self.workbook[self.month_boxlist.get()]
@@ -271,7 +280,7 @@ class Manager:
         self.current_sheet_initial_ammount = sheet['H4'].value
         return sheet
 
-    def save_workbook(self, folder_path):
+    def save_workbook(self):
         # clear old data
         self.current_sheet.delete_cols(7, 2)
 
@@ -317,6 +326,38 @@ class Manager:
     def on_closing(self):
         if not self.performing_operation:
             self.workbook.close()
+            self.stop()
             self.root.destroy()
+            self.print_logs()
 
-Manager()
+    def add_log(self, message):
+        self.log.append(f'{self.get_timestamp()} - {message}')
+
+    def get_timestamp(self):
+        return datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+
+    def print_logs(self):
+        for log in self.log: print(log)
+
+    def run(self):
+        self.root.mainloop()
+
+    def stop(self):
+        self.root.quit()
+
+# imports down here due to circular dependency
+import EditMonth as editMonth
+import EditData as editFrame
+import AddMonth as addMonth
+import AddData as addFrame
+import AddYear as addYear
+import openpyxl as xlrw
+import tkinter as tk
+import os
+from openpyxl.styles import Font
+from tkinter import messagebox
+from datetime import datetime
+from datetime import date
+from tkinter import ttk
+
+# Manager().run()

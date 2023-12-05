@@ -1,12 +1,13 @@
 import tkcalendar as tkCal
 import tkinter as tk
+import Manager as mn
 from tkinter import messagebox
 from datetime import datetime
 from datetime import date
 from tkinter import ttk
 
 class EditExpense:
-    def __init__(self, manager):
+    def __init__(self, manager: mn.Manager):
         self.manager = manager
         self.root = tk.Toplevel(self.manager.root)
         self.root.title("Edit")
@@ -16,8 +17,6 @@ class EditExpense:
 
         self.root.protocol("WM_DELETE_WINDOW", self.on_closing)
 
-        self.root.mainloop()
-
     def setup_inputFrame(self):
         self.input_frame = tk.Frame(self.root)
 
@@ -26,7 +25,7 @@ class EditExpense:
         # date input
         self.date_label = tk.Label(self.input_frame, text="Date: ", font=self.manager.main_font)
         self.date_label.grid(row=0, column=0, sticky=tk.EW)
-        self.date_inputCal = tkCal.Calendar(self.input_frame, firstweekday="sunday") # confirmar que a data que sai daqui vem com o formato dado
+        self.date_inputCal = tkCal.Calendar(self.input_frame, firstweekday="sunday")
         self.date_inputCal.grid(row=0, column=1, sticky=tk.EW)
         self.date_inputCal.selection_set(datetime.strptime(self.item_values[0], '%d/%m/%Y'))
 
@@ -54,7 +53,7 @@ class EditExpense:
         # category input
         self.category_label = tk.Label(self.input_frame, text="Category: ", font=self.manager.main_font)
         self.category_label.grid(row=4, column=0, sticky=tk.EW)
-        self.category_input = ttk.Combobox(self.input_frame, value=self.manager.categories_list)
+        self.category_input = ttk.Combobox(self.input_frame, value=self.manager.categories_list, state='readonly')
         self.category_input.current(self.manager.categories_list.index(self.item_values[4]))
         self.category_input.grid(row=4, column=1, sticky=tk.EW)
 
@@ -83,8 +82,8 @@ class EditExpense:
             messagebox.showwarning("Missing Parameters", "There are empty parameters, cannot perform operation!")
         else:
             if not messagebox.askyesno("Confirm expense", "Are you sure you want to add this expense?"): return
-            new_row = (date, ammount, purpose, description, category)
-            self.manager.edit_row_on_current_sheet(new_row)
+            self.new_row = (date, ammount, purpose, description, category)
+            self.manager.edit_row_on_current_sheet(self.new_row)
             self.on_closing()
 
     def clear_data(self):
@@ -95,6 +94,13 @@ class EditExpense:
         self.description_input.delete('1.0', tk.END)
         self.category_input.current(0)
 
+    def run(self):
+        self.root.mainloop()
+
+    def stop(self):
+        self.root.quit()
+
     def on_closing(self):
         self.manager.finish_op()
+        self.stop()
         self.root.destroy()
