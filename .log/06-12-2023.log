@@ -1,0 +1,118 @@
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "C:\Users\luisr\AppData\Local\Programs\Python\Python311\Lib\tkinter\__init__.py", line 1948, in __call__
+    return self.func(*args)
+           ^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\햞ea de Trabalho\Projetos\Expense Manager\AddYear.py", line 75, in create_workbook
+    self.manager.create_workbook(info)
+  File "c:\Users\luisr\OneDrive\햞ea de Trabalho\Projetos\Expense Manager\Manager.py", line 131, in create_workbook
+    self.year_boxlist.current(self.books_names.index(new_file_name))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: '2024.xlsx' is not in list
+06/12/2023 17:34:37 - Creating workbook with name "2024"
+06/12/2023 17:34:37 - Creating worksheet "Janeiro" with initial date "06/12/2023" and initial amount "1400.0" on current workbook "2024"
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "C:\Users\luisr\AppData\Local\Programs\Python\Python311\Lib\tkinter\__init__.py", line 1948, in __call__
+    return self.func(*args)
+           ^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\햞ea de Trabalho\Projetos\Expense Manager\AddYear.py", line 75, in create_workbook
+    self.manager.create_workbook(info)
+  File "c:\Users\luisr\OneDrive\햞ea de Trabalho\Projetos\Expense Manager\Manager.py", line 132, in create_workbook
+    self.year_boxlist.current(self.books_names.index(new_file_name))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: '2024.xlsx' is not in list
+06/12/2023 17:36:41 - Creating workbook with name "2024"
+06/12/2023 17:36:41 - Creating worksheet "Janeiro" with initial date "06/12/2023" and initial amount "2000.0" on current workbook "2024"
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "C:\Users\luisr\AppData\Local\Programs\Python\Python311\Lib\tkinter\__init__.py", line 1948, in __call__
+    return self.func(*args)
+           ^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\햞ea de Trabalho\Projetos\Expense Manager\Manager.py", line 90, in update_sheets
+    self.workbook = xlrw.load_workbook(self.folder_path + self.year_boxlist.get())
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\햞ea de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\openpyxl\reader\excel.py", line 344, in load_workbook
+    reader = ExcelReader(filename, read_only, keep_vba,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\햞ea de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\openpyxl\reader\excel.py", line 123, in __init__
+    self.archive = _validate_archive(fn)
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\햞ea de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\openpyxl\reader\excel.py", line 93, in _validate_archive
+    raise InvalidFileException(msg)
+openpyxl.utils.exceptions.InvalidFileException: openpyxl does not support  file format, please check you can open it with Excel first. Supported formats are: .xlsx,.xlsm,.xltx,.xltm
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "C:\Users\luisr\AppData\Local\Programs\Python\Python311\Lib\tkinter\__init__.py", line 1948, in __call__
+    return self.func(*args)
+           ^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\햞ea de Trabalho\Projetos\Expense Manager\Manager.py", line 90, in update_sheets
+    self.workbook = xlrw.load_workbook(self.folder_path + self.year_boxlist.get())
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\햞ea de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\openpyxl\reader\excel.py", line 344, in load_workbook
+    reader = ExcelReader(filename, read_only, keep_vba,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\햞ea de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\openpyxl\reader\excel.py", line 123, in __init__
+    self.archive = _validate_archive(fn)
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\햞ea de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\openpyxl\reader\excel.py", line 93, in _validate_archive
+    raise InvalidFileException(msg)
+openpyxl.utils.exceptions.InvalidFileException: openpyxl does not support  file format, please check you can open it with Excel first. Supported formats are: .xlsx,.xlsm,.xltx,.xltm
+06/12/2023 17:41:31 - Creating workbook with name "2024"
+06/12/2023 17:41:31 - Creating worksheet "Janeiro" with initial date "06/12/2023" and initial amount "1400.0" on current workbook "2024"
+06/12/2023 17:47:27 - Creating workbook with name "2024"
+06/12/2023 17:47:27 - Creating worksheet "Janeiro" with initial date "06/12/2023" and initial amount "1400.0" on current workbook "2024.xlsx"
+06/12/2023 17:47:51 - Added "expense" with data ('06/12/2023', -20.0, 'weed', 'muita bom', 'Leisure')
+06/12/2023 17:48:08 - Added "revenue" with data ('06/12/2023', 1400.0, 'timwe', 'ordenado', 'Income')
+06/12/2023 18:13:52 - Saving workbook 2024.xlsx
+06/12/2023 18:14:10 - Creating worksheet "Fevereiro" with initial date "01/02/2024" and initial amount "3000.0" on current workbook "2024.xlsx"
+06/12/2023 18:14:10 - Saving workbook 2024.xlsx
+06/12/2023 18:14:25 - Saving workbook 2024.xlsx
+06/12/2023 18:14:25 - Added "revenue" with data ('06/12/2023', 200.0, 'timwe', 'ordenado', 'Income')
+06/12/2023 18:14:37 - Saving workbook 2024.xlsx
+06/12/2023 18:14:37 - Added "expense" with data ('06/12/2023', -30.0, 'jantar', 'fora', 'Food')
+06/12/2023 18:14:48 - Saving workbook 2024.xlsx
+06/12/2023 18:14:48 - Editing ['06/12/2023', '-30.0', 'jantar', 'fora', 'Food'] to ('06/12/2023', 30.0, 'jantar', 'fora', 'Income')
+06/12/2023 18:14:57 - Saving workbook 2024.xlsx
+06/12/2023 18:14:57 - Editing ['06/12/2023', '30.0', 'jantar', 'fora', 'Income'] to ('06/12/2023', 30.0, 'jantar', 'fora', 'Education')
+06/12/2023 18:16:02 - Saving workbook 2024.xlsx
+06/12/2023 18:16:03 - Saving workbook 2024.xlsx
+06/12/2023 18:16:08 - Saving workbook 2024.xlsx
+06/12/2023 18:16:08 - Editing ['06/12/2023', 30, 'jantar', 'fora', 'Education'] to ('06/12/2023', -30.0, 'jantar', 'fora', 'Education')
+06/12/2023 18:16:12 - Saving workbook 2024.xlsx
+06/12/2023 18:16:12 - Editing ['06/12/2023', '-30.0', 'jantar', 'fora', 'Education'] to ('06/12/2023', -30.0, 'jantar', 'fora', 'Education')
+06/12/2023 18:16:18 - Saving workbook 2024.xlsx
+06/12/2023 18:16:18 - Editing ['06/12/2023', '-30.0', 'jantar', 'fora', 'Education'] to ('06/12/2023', 30.0, 'jantar', 'fora', 'Income')
+06/12/2023 18:16:24 - Saving workbook 2024.xlsx
+06/12/2023 18:16:24 - Editing ['06/12/2023', '30.0', 'jantar', 'fora', 'Income'] to ('06/12/2023', -30.0, 'jantar', 'fora', 'Leisure')
+06/12/2023 18:17:38 - Saving workbook 2023.xlsx
+06/12/2023 18:17:38 - Saving workbook 2024.xlsx
+06/12/2023 18:17:39 - Saving workbook 2024.xlsx
+06/12/2023 18:17:43 - Saving workbook 2024.xlsx
+06/12/2023 18:17:43 - Editing ['06/12/2023', -30, 'jantar', 'fora', 'Leisure'] to ('06/12/2023', -30.0, 'jantar', 'fora', 'Leisure')
+06/12/2023 18:17:46 - Saving workbook 2024.xlsx
+06/12/2023 18:17:46 - Editing ['06/12/2023', '-30.0', 'jantar', 'fora', 'Leisure'] to ('06/12/2023', -30.0, 'jantar', 'fora', 'Leisure')
+06/12/2023 18:17:51 - Saving workbook 2024.xlsx
+06/12/2023 18:17:51 - Editing ['06/12/2023', '-30.0', 'jantar', 'fora', 'Leisure'] to ('06/12/2023', 30.0, 'jantar', 'fora', 'Income')
+06/12/2023 18:17:54 - Saving workbook 2024.xlsx
+06/12/2023 18:17:54 - Editing ['06/12/2023', '30.0', 'jantar', 'fora', 'Income'] to ('06/12/2023', -30.0, 'jantar', 'fora', 'Income')
+06/12/2023 18:18:12 - Saving workbook 2024.xlsx
+06/12/2023 18:18:16 - Saving workbook 2024.xlsx
+06/12/2023 18:18:16 - Editing ['06/12/2023', -20, 'weed', 'muita bom', 'Leisure'] to ('06/12/2023', -20.0, 'weed', 'muita bom', 'Leisure')
+06/12/2023 18:18:23 - Saving workbook 2024.xlsx
+06/12/2023 18:18:23 - Editing ['06/12/2023', '-20.0', 'weed', 'muita bom', 'Leisure'] to ('06/12/2023', 20.0, 'weed', 'muita bom', 'Income')
+06/12/2023 18:18:25 - Saving workbook 2024.xlsx
+06/12/2023 18:18:25 - Editing ['06/12/2023', '20.0', 'weed', 'muita bom', 'Income'] to ('06/12/2023', -20.0, 'weed', 'muita bom', 'Income')
+06/12/2023 18:18:54 - Saving workbook 2024.xlsx
+06/12/2023 18:18:58 - Saving workbook 2024.xlsx
+06/12/2023 18:18:58 - Editing ['06/12/2023', -20, 'weed', 'muita bom', 'Income'] to ('06/12/2023', 20.0, 'weed', 'muita bom', 'Income')
+06/12/2023 18:19:01 - Saving workbook 2024.xlsx
+06/12/2023 18:19:01 - Editing ['06/12/2023', '20.0', 'weed', 'muita bom', 'Income'] to ('06/12/2023', 20.0, 'weed', 'muita bom', 'Income')
+06/12/2023 18:19:04 - Saving workbook 2024.xlsx
+06/12/2023 18:19:04 - Editing ['06/12/2023', '20.0', 'weed', 'muita bom', 'Income'] to ('06/12/2023', 20.0, 'weed', 'muita bom', 'Income')
+06/12/2023 18:19:12 - Saving workbook 2024.xlsx
+06/12/2023 18:19:12 - Editing ['06/12/2023', '20.0', 'weed', 'muita bom', 'Income'] to ('06/12/2023', -20.0, 'weed', 'muita bom', 'Health')
+06/12/2023 18:19:15 - Saving workbook 2024.xlsx
+06/12/2023 18:19:15 - Editing ['06/12/2023', '-20.0', 'weed', 'muita bom', 'Health'] to ('06/12/2023', -20.0, 'weed', 'muita bom', 'Health')
+06/12/2023 18:19:20 - Saving workbook 2024.xlsx
+06/12/2023 18:19:20 - Editing ['06/12/2023', '-20.0', 'weed', 'muita bom', 'Health'] to ('06/12/2023', 20.0, 'weed', 'muita bom', 'Income')

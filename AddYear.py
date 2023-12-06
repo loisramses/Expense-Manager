@@ -65,12 +65,12 @@ class AddYear:
         if year_name == '' or month_name == '' or init_ammount == '':
             messagebox.showwarning("Missing Parameters", "There are empty parameters, cannot perform operation!")
         else:
-            if not messagebox.askyesno("Confirm expense", "Are you sure you want to create this workbook?"): return
+            if not messagebox.askyesno("Confirm", "Are you sure you want to create this workbook?"): return
             info = {
                 'year_name': year_name,
                 'month_name': month_name,
                 'init_date': init_date,
-                'init_ammount': init_ammount
+                'init_ammount': float(init_ammount)
             }
             self.manager.create_workbook(info)
             self.on_closing()

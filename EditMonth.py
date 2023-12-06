@@ -59,7 +59,17 @@ class EditMonth:
         start_date = self.start_date_inputCal.selection_get().strftime("%d/%m/%Y")
         end_date = self.end_date_inputCal.selection_get().strftime("%d/%m/%Y")
         ammount = self.ammount_input.get('1.0', tk.END).strip()
-        print(start_date, end_date, ammount)
+        if ammount == '':
+            messagebox.showwarning("Missing Parameters", "There are empty parameters, cannot perform operation!")
+        else:
+            if not messagebox.askyesno("Confirm", "Are you sure you want to edit this month?"): return
+            info = {
+                'start_date': start_date,
+                'end_date': end_date,
+                'initial_ammount': float(ammount)
+            }
+            self.manager.edit_current_sheet(info)
+            self.on_closing()
 
     def clear_data(self):
         # reset data

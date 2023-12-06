@@ -81,7 +81,10 @@ class EditExpense:
         if ammount == '' or purpose == '' or description == '':
             messagebox.showwarning("Missing Parameters", "There are empty parameters, cannot perform operation!")
         else:
-            if not messagebox.askyesno("Confirm expense", "Are you sure you want to add this expense?"): return
+            if not messagebox.askyesno("Confirm", "Are you sure you want to edit this data?"): return
+            ammount = float(ammount)
+            if category == 'Income' and ammount < 0: ammount *= -1
+            elif category != 'Income' and ammount > 0: ammount *= -1
             self.new_row = (date, ammount, purpose, description, category)
             self.manager.edit_row_on_current_sheet(self.new_row)
             self.on_closing()

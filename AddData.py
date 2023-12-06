@@ -78,7 +78,7 @@ class AddData:
         if ammount == '' or purpose == '' or description == '':
             messagebox.showwarning("Missing Parameters", "There are empty parameters, cannot perform operation!")
         else:
-            if not messagebox.askyesno("Confirm expense", "Are you sure you want to add this expense?"): return
+            if not messagebox.askyesno("Confirm", f"Are you sure you want to add this {self.type_of_op}?"): return
             self.new_row = (date, float(ammount)*self.op_type, purpose, description, category)
             self.manager.add_row_to_current_sheet(self.new_row)
             self.on_closing()

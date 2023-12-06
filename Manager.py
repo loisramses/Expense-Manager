@@ -119,6 +119,7 @@ class Manager:
         self.add_log(f'Creating workbook with name "{info["year_name"]}"')
 
         new_file_name = info['year_name'] + '.xlsx'
+        info['year_name'] = new_file_name
 
         # create a new workbook, a new sheet and save it
         self.workbook = xlrw.Workbook()
@@ -164,7 +165,7 @@ class Manager:
         # insert ammounts
         self.current_sheet['G4'] = 'Montante inicial:'
         self.current_sheet['G4'].font = self.cell_font
-        self.current_sheet['H4'] = float(info['init_ammount'])
+        self.current_sheet['H4'] = info['init_ammount']
         self.current_sheet['H4'].number_format = self.number_format_str
         self.current_sheet['G5'] = 'Montante final:'
         self.current_sheet['G5'].font = self.cell_font
@@ -184,8 +185,16 @@ class Manager:
         month_frame = addMonth.AddMonth(self)
         month_frame.run()
 
-    def edit_current_sheet(self):
-        pass
+    def edit_current_sheet(self, info):
+        self.add_log(f'Editing worksheet "{self.month_boxlist.get()}":')
+        self.add_log(f'previous info - start_date: {self.current_sheet_start_date}, end_date: {self.current_sheet_end_date}, initial_amount: {self.current_sheet_initial_ammount}')
+
+        # set the updated data for the current sheet
+        self.current_sheet_start_date = info['start_date']
+        self.current_sheet_end_date = info['end_date']
+        self.current_sheet_initial_ammount = info['initial_ammount']
+        self.add_log(f'updated info - start_date: {self.current_sheet_start_date}, end_date: {self.current_sheet_end_date}, initial_amount: {self.current_sheet_initial_ammount}')
+        self.save_workbook()
 
     def edit_month(self):
         self.perform_op()
@@ -234,7 +243,7 @@ class Manager:
         target_index = self.expense_treeList.index(self.selection[0])+2
         self.current_sheet.cell(row=target_index, column=1, value=date)
         try:
-            self.current_sheet.cell(row=target_index, column=2, value=float(ammount)).number_format = self.number_format_str
+            self.current_sheet.cell(row=target_index, column=2, value=ammount).number_format = self.number_format_str
         except:
             messagebox.showwarning("Invalid number format", "The value must be seperated by \".\"!")
             return
@@ -256,6 +265,8 @@ class Manager:
         self.perform_op()
         edit_frame = editFrame.EditExpense(self)
         edit_frame.run()
+        if hasattr(edit_frame, 'item_values') and hasattr(edit_frame, 'new_row'):
+            self.add_log(f'Editing {edit_frame.item_values} to {edit_frame.new_row}')
 
     def delete_selection(self):
         selection = self.expense_treeList.selection()
@@ -265,6 +276,7 @@ class Manager:
             return
         if messagebox.askyesno("Confirm deletion", "Are you sure you want to delete all the selected items? This will permanently delete the selected items!"):
             for row in selection:
+                self.add_log(f'Deleting {row}')
                 self.current_sheet.delete_rows(self.expense_treeList.index(row)+2, 1) # +2 bc of header and index starts at 0
                 self.expense_treeList.delete(row)
                 self.row_nmb -= 1
@@ -281,6 +293,8 @@ class Manager:
         return sheet
 
     def save_workbook(self):
+        self.add_log(f'Saving workbook {self.year_boxlist.get()}')
+
         # clear old data
         self.current_sheet.delete_cols(7, 2)
 
