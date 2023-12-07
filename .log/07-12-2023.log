@@ -1,0 +1,182 @@
+07/12/2023 10:03:51 - Saving workbook 2024.xlsx
+07/12/2023 10:03:59 - Deleting 2024.xlsx
+07/12/2023 10:05:40 - Creating workbook with name "2024"
+07/12/2023 10:05:40 - Creating worksheet "Janeiro" with initial date "07/12/2023" and initial amount "1200.0" on current workbook "2024.xlsx"
+07/12/2023 10:05:40 - Saving workbook 2024.xlsx
+07/12/2023 10:05:44 - Deleting 2024.xlsx
+07/12/2023 10:05:44 - Saving workbook 2023.xlsx
+07/12/2023 10:10:12 - Creating worksheet "Janiero" with initial date "07/12/2023" and initial amount "320.0" on current workbook "2023.xlsx"
+07/12/2023 10:10:12 - Saving workbook 2023.xlsx
+07/12/2023 10:10:18 - Deleting Janiero
+07/12/2023 10:10:18 - Saving workbook 2023.xlsx
+07/12/2023 10:10:21 - Saving workbook 2023.xlsx
+07/12/2023 10:10:22 - Saving workbook 2023.xlsx
+07/12/2023 10:10:23 - Saving workbook 2023.xlsx
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "C:\Users\luisr\AppData\Local\Programs\Python\Python311\Lib\tkinter\__init__.py", line 1948, in __call__
+    return self.func(*args)
+           ^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\햞ea de Trabalho\Projetos\Expense Manager\Manager.py", line 100, in update_expenses
+    self.save_workbook() # save information when changing worksheets
+    ^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\햞ea de Trabalho\Projetos\Expense Manager\Manager.py", line 346, in save_workbook
+    self.workbook.save(self.folder_path + self.year_boxlist.get())
+  File "c:\Users\luisr\OneDrive\햞ea de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\openpyxl\workbook\workbook.py", line 386, in save
+    save_workbook(self, filename)
+  File "c:\Users\luisr\OneDrive\햞ea de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\openpyxl\writer\excel.py", line 291, in save_workbook
+    archive = ZipFile(filename, 'w', ZIP_DEFLATED, allowZip64=True)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luisr\AppData\Local\Programs\Python\Python311\Lib\zipfile.py", line 1281, in __init__
+    self.fp = io.open(file, filemode)
+              ^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: './expenses/2023.xlsx'
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "C:\Users\luisr\AppData\Local\Programs\Python\Python311\Lib\tkinter\__init__.py", line 1948, in __call__
+    return self.func(*args)
+           ^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\햞ea de Trabalho\Projetos\Expense Manager\Manager.py", line 100, in update_expenses
+    self.save_workbook() # save information when changing worksheets
+    ^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\햞ea de Trabalho\Projetos\Expense Manager\Manager.py", line 346, in save_workbook
+    self.workbook.save(self.folder_path + self.year_boxlist.get())
+  File "c:\Users\luisr\OneDrive\햞ea de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\openpyxl\workbook\workbook.py", line 386, in save
+    save_workbook(self, filename)
+  File "c:\Users\luisr\OneDrive\햞ea de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\openpyxl\writer\excel.py", line 291, in save_workbook
+    archive = ZipFile(filename, 'w', ZIP_DEFLATED, allowZip64=True)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luisr\AppData\Local\Programs\Python\Python311\Lib\zipfile.py", line 1281, in __init__
+    self.fp = io.open(file, filemode)
+              ^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: './expenses/2023.xlsx'
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "C:\Users\luisr\AppData\Local\Programs\Python\Python311\Lib\tkinter\__init__.py", line 1948, in __call__
+    return self.func(*args)
+           ^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\햞ea de Trabalho\Projetos\Expense Manager\Manager.py", line 100, in update_expenses
+    self.save_workbook() # save information when changing worksheets
+    ^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\햞ea de Trabalho\Projetos\Expense Manager\Manager.py", line 346, in save_workbook
+    self.workbook.save(self.folder_path + self.year_boxlist.get())
+  File "c:\Users\luisr\OneDrive\햞ea de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\openpyxl\workbook\workbook.py", line 386, in save
+    save_workbook(self, filename)
+  File "c:\Users\luisr\OneDrive\햞ea de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\openpyxl\writer\excel.py", line 291, in save_workbook
+    archive = ZipFile(filename, 'w', ZIP_DEFLATED, allowZip64=True)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luisr\AppData\Local\Programs\Python\Python311\Lib\zipfile.py", line 1281, in __init__
+    self.fp = io.open(file, filemode)
+              ^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: './expenses/2023.xlsx'
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "C:\Users\luisr\AppData\Local\Programs\Python\Python311\Lib\tkinter\__init__.py", line 1948, in __call__
+    return self.func(*args)
+           ^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\햞ea de Trabalho\Projetos\Expense Manager\Manager.py", line 100, in update_expenses
+    self.save_workbook() # save information when changing worksheets
+    ^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\햞ea de Trabalho\Projetos\Expense Manager\Manager.py", line 346, in save_workbook
+    self.workbook.save(self.folder_path + self.year_boxlist.get())
+  File "c:\Users\luisr\OneDrive\햞ea de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\openpyxl\workbook\workbook.py", line 386, in save
+    save_workbook(self, filename)
+  File "c:\Users\luisr\OneDrive\햞ea de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\openpyxl\writer\excel.py", line 291, in save_workbook
+    archive = ZipFile(filename, 'w', ZIP_DEFLATED, allowZip64=True)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luisr\AppData\Local\Programs\Python\Python311\Lib\zipfile.py", line 1281, in __init__
+    self.fp = io.open(file, filemode)
+              ^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: './expenses/2023.xlsx'
+07/12/2023 10:14:09 - Saving workbook 2023.xlsx
+07/12/2023 10:14:11 - Saving workbook 2023.xlsx
+07/12/2023 10:14:12 - Saving workbook 2023.xlsx
+07/12/2023 10:14:13 - Saving workbook 2023.xlsx
+<Worksheet "Janiero">
+07/12/2023 10:15:07 - Saving workbook 2023.xlsx
+07/12/2023 10:15:10 - Deleting Janiero
+07/12/2023 10:15:10 - Saving workbook 2023.xlsx
+07/12/2023 10:16:29 - Saving workbook 2023.xlsx
+07/12/2023 10:16:33 - Deleting Janiero
+07/12/2023 10:16:33 - Saving workbook 2023.xlsx
+07/12/2023 10:16:33 - Saving workbook 2023.xlsx
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "C:\Users\luisr\AppData\Local\Programs\Python\Python311\Lib\tkinter\__init__.py", line 1948, in __call__
+    return self.func(*args)
+           ^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\햞ea de Trabalho\Projetos\Expense Manager\Manager.py", line 101, in update_expenses
+    self.save_workbook() # save information when changing worksheets
+    ^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\햞ea de Trabalho\Projetos\Expense Manager\Manager.py", line 349, in save_workbook
+    self.workbook.save(self.folder_path + self.year_boxlist.get())
+  File "c:\Users\luisr\OneDrive\햞ea de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\openpyxl\workbook\workbook.py", line 386, in save
+    save_workbook(self, filename)
+  File "c:\Users\luisr\OneDrive\햞ea de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\openpyxl\writer\excel.py", line 291, in save_workbook
+    archive = ZipFile(filename, 'w', ZIP_DEFLATED, allowZip64=True)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luisr\AppData\Local\Programs\Python\Python311\Lib\zipfile.py", line 1281, in __init__
+    self.fp = io.open(file, filemode)
+              ^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: './expenses/2023.xlsx'
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "C:\Users\luisr\AppData\Local\Programs\Python\Python311\Lib\tkinter\__init__.py", line 1948, in __call__
+    return self.func(*args)
+           ^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\햞ea de Trabalho\Projetos\Expense Manager\Manager.py", line 101, in update_expenses
+    self.save_workbook() # save information when changing worksheets
+    ^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\햞ea de Trabalho\Projetos\Expense Manager\Manager.py", line 349, in save_workbook
+    self.workbook.save(self.folder_path + self.year_boxlist.get())
+  File "c:\Users\luisr\OneDrive\햞ea de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\openpyxl\workbook\workbook.py", line 386, in save
+    save_workbook(self, filename)
+  File "c:\Users\luisr\OneDrive\햞ea de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\openpyxl\writer\excel.py", line 291, in save_workbook
+    archive = ZipFile(filename, 'w', ZIP_DEFLATED, allowZip64=True)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luisr\AppData\Local\Programs\Python\Python311\Lib\zipfile.py", line 1281, in __init__
+    self.fp = io.open(file, filemode)
+              ^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: './expenses/2023.xlsx'
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "C:\Users\luisr\AppData\Local\Programs\Python\Python311\Lib\tkinter\__init__.py", line 1948, in __call__
+    return self.func(*args)
+           ^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\햞ea de Trabalho\Projetos\Expense Manager\Manager.py", line 101, in update_expenses
+    self.save_workbook() # save information when changing worksheets
+    ^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\햞ea de Trabalho\Projetos\Expense Manager\Manager.py", line 349, in save_workbook
+    self.workbook.save(self.folder_path + self.year_boxlist.get())
+  File "c:\Users\luisr\OneDrive\햞ea de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\openpyxl\workbook\workbook.py", line 386, in save
+    save_workbook(self, filename)
+  File "c:\Users\luisr\OneDrive\햞ea de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\openpyxl\writer\excel.py", line 291, in save_workbook
+    archive = ZipFile(filename, 'w', ZIP_DEFLATED, allowZip64=True)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luisr\AppData\Local\Programs\Python\Python311\Lib\zipfile.py", line 1281, in __init__
+    self.fp = io.open(file, filemode)
+              ^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: './expenses/2023.xlsx'
+07/12/2023 10:22:11 - Saving workbook 2023.xlsx
+07/12/2023 10:22:12 - Saving workbook 2023.xlsx
+07/12/2023 10:22:13 - Saving workbook 2023.xlsx
+07/12/2023 10:22:36 - Saving workbook 2023.xlsx
+07/12/2023 10:22:37 - Saving workbook 2023.xlsx
+07/12/2023 10:55:05 - Saving workbook 2023.xlsx
+07/12/2023 12:08:32 - Saving workbook 2023.xlsx
+07/12/2023 12:10:25 - Saving workbook 2023.xlsx
+07/12/2023 12:10:27 - Saving workbook 2023.xlsx
+07/12/2023 12:10:28 - Saving workbook 2023.xlsx
+07/12/2023 14:39:08 - Saving workbook 2023.xlsx
+07/12/2023 14:39:57 - Saving workbook 2023.xlsx
+07/12/2023 14:40:35 - Saving workbook 2023.xlsx
+07/12/2023 14:40:46 - Saving workbook 2023.xlsx
+07/12/2023 14:40:46 - Editing ['27/11/2023', '59.99', 'HIPAY SAS', 'Sapatilhas - SportZone', 'Food'] to ('27/11/2023', -59.99, 'HIPAY SAS', 'Sapatilhas - SportZone', 'Investments')
+07/12/2023 14:40:50 - Deleting I017
+07/12/2023 14:40:50 - Saving workbook 2023.xlsx
+07/12/2023 14:40:50 - Saving workbook 2023.xlsx
+07/12/2023 14:40:52 - Saving workbook 2023.xlsx
+07/12/2023 14:40:53 - Saving workbook 2023.xlsx
+07/12/2023 14:40:54 - Saving workbook 2023.xlsx
+07/12/2023 14:41:56 - Saving workbook 2023.xlsx
+07/12/2023 14:41:57 - Saving workbook 2023.xlsx
