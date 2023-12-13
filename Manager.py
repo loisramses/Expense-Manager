@@ -223,13 +223,11 @@ class Manager:
             self.update_expenses()
 
     def update_expenses(self, event=None):
-        self.row_nmb = 0
         if hasattr(self, 'current_sheet'):
             self.save_workbook() # save information when changing worksheets
         
         self.current_sheet = self.get_current_sheet()
         self.current_sheet_data = self.get_current_month_data(self.current_sheet)
-
         if hasattr(self, 'category_stat_boxlist'):
             self.update_all_stats()
         self.populate_expensesTree()
@@ -242,7 +240,6 @@ class Manager:
 
     def add_row_to_current_sheet(self, row):
         # add row to excel
-        self.current_sheet.cell(row=self.row_nmb+1, column=1, value=row[0])
         try:
             self.current_sheet.cell(row=self.row_nmb+1, column=2, value=float(row[1])).number_format = self.ammount_format_str
         except:
@@ -252,10 +249,7 @@ class Manager:
         self.current_sheet.cell(row=self.row_nmb+1, column=4, value=str(row[3]))
         self.current_sheet.cell(row=self.row_nmb+1, column=5, value=str(row[4]))
 
-        self.current_sheet_data.append(row)
-        self.save_workbook()
-        self.row_nmb += 1
-        self.populate_expensesTree()
+        self.update_expenses()
 
     def add_dataToExcel(self, type_of_op):
         self.perform_op()
@@ -316,7 +310,7 @@ class Manager:
         if messagebox.askyesno("Confirm deletion", "Are you sure you want to delete all the selected items? This will permanently delete the selected items!"):
             for row in selection:
                 self.add_log(f'Deleting {self.expense_treeList.item(row)}')
-                self.current_sheet.delete_rows(self.expense_treeList.index(row)+1, 1) # +1 bc of header and index starts at 0
+                self.current_sheet.delete_rows(self.expense_treeList.index(row)+2, 1) # +1 bc of header and index starts at 0
                 self.expense_treeList.delete(row)
                 self.row_nmb -= 1
 
@@ -408,54 +402,60 @@ class Manager:
         self.update_daily_spendingsStats()
 
     def update_categoryStats(self, event=None):
+        self.category_stat_ax.clear()
         if (self.category_stat_boxlist.current() == 0): data = self.get_current_month_data(self.current_sheet)
         else: data = self.get_current_year_data(self.current_workbook)
         df = pd.DataFrame(data, columns=self.headings)
-        df['AMMOUNT'] = df['AMMOUNT'].abs()
-        cat_totals = df.groupby('CATEGORY').sum().round(2)
-        self.category_stat_ax.clear()
-        _, _, autotexts = self.category_stat_ax.pie(cat_totals['AMMOUNT'], labels=cat_totals.index, autopct='%.2f%%')
-        for i, value in enumerate(cat_totals['AMMOUNT']):
-            autotexts[i].set_text(str(value))
+        if not df.empty:
+            df['AMMOUNT'] = df['AMMOUNT'].abs()
+            cat_totals = df.groupby('CATEGORY').sum().round(2)
+            _, _, autotexts = self.category_stat_ax.pie(cat_totals['AMMOUNT'], labels=cat_totals.index, autopct='%.2f%%')
+            for i, value in enumerate(cat_totals['AMMOUNT']):
+                autotexts[i].set_text(str(value))
         self.category_stat_canvas.draw()
 
     def update_gain_spendingsStats(self, event=None):
+        self.gain_spendings_stat_ax.clear()
         if (self.gain_spendings_stat_boxlist.current() == 0): data = self.get_current_month_data(self.current_sheet)
         else: data = self.get_current_year_data(self.current_workbook)
         df = pd.DataFrame(data, columns=self.headings)
-        df['GROUP'] = df['CATEGORY'].apply(lambda x: 'Income' if x == 'Income' else 'Expenses')
-        df['AMMOUNT'] = df['AMMOUNT'].abs()
-        cat_totals = df.groupby('GROUP').sum().round(2)
-        self.gain_spendings_stat_ax.clear()
-        _, _, autotexts = self.gain_spendings_stat_ax.pie(cat_totals['AMMOUNT'], labels=cat_totals.index, autopct='%.2f%%')
-        for i, value in enumerate(cat_totals['AMMOUNT']):
-            autotexts[i].set_text(value)
+        if not df.empty:
+            df['GROUP'] = df['CATEGORY'].apply(lambda x: 'Income' if x == 'Income' else 'Expenses')
+            df['AMMOUNT'] = df['AMMOUNT'].abs()
+            cat_totals = df.groupby('GROUP').sum().round(2)
+            
+            _, _, autotexts = self.gain_spendings_stat_ax.pie(cat_totals['AMMOUNT'], labels=cat_totals.index, autopct='%.2f%%')
+            for i, value in enumerate(cat_totals['AMMOUNT']):
+                autotexts[i].set_text(value)
         self.gain_spendings_stat_canvas.draw()
 
     def update_daily_spendingsStats(self, event=None):
+        self.daily_spendings_stat_ax.clear()
         if (self.daily_spendings_stat_boxlist.current() == 0): data = self.get_current_month_data(self.current_sheet)
         else: data = self.get_current_year_data(self.current_workbook)
         df = pd.DataFrame(data, columns=self.headings)
-        df['DATE'] = pd.to_datetime(df['DATE'], format='%d/%m/%Y')
-        df['DATE'] = df['DATE'].dt.strftime('%d/%m')
-        df['AMMOUNT'] = df['AMMOUNT'].abs()
-        df['GROUP'] = df['CATEGORY'].apply(lambda x: 'Income' if x == 'Income' else 'Expenses')
-        pivot_df = df.pivot_table(index='DATE', columns='GROUP', values='AMMOUNT', aggfunc='sum', fill_value=0)
+        if not df.empty:
+            df['DATE'] = pd.to_datetime(df['DATE'], format='%d/%m/%Y')
+            df['AMMOUNT'] = df['AMMOUNT'].abs()
+            df['GROUP'] = df['CATEGORY'].apply(lambda x: 'Income' if x == 'Income' else 'Expenses')
+            pivot_df = df.pivot_table(index='DATE', columns='GROUP', values='AMMOUNT', aggfunc='sum', fill_value=0)
+            pivot_df.sort_index()
+            pivot_df.index = pivot_df.index.strftime('%d/%m')
 
-        bar_width = 0.4
-        bar_pos = np.arange(len(pivot_df.index))
-        self.daily_spendings_stat_ax.clear()
-        if 'Expenses' in pivot_df.columns:
-            expenses = pivot_df['Expenses']
-            self.daily_spendings_stat_ax.bar(bar_pos - bar_width/2, expenses, width=bar_width, label='Expenses')
-        if 'Income' in pivot_df.columns:
-            income = pivot_df['Income']
-            self.daily_spendings_stat_ax.bar(bar_pos + bar_width/2, income, width=bar_width, label='Income')
+            bar_width = 0.4
+            bar_pos = np.arange(len(pivot_df.index))
+            
+            if 'Expenses' in pivot_df.columns:
+                expenses = pivot_df['Expenses']
+                self.daily_spendings_stat_ax.bar(bar_pos - bar_width/2, expenses, width=bar_width, label='Expenses')
+            if 'Income' in pivot_df.columns:
+                income = pivot_df['Income']
+                self.daily_spendings_stat_ax.bar(bar_pos + bar_width/2, income, width=bar_width, label='Income')
 
-        # Formatting
-        self.daily_spendings_stat_ax.set_xticks(range(len(pivot_df.index)))
-        self.daily_spendings_stat_ax.set_xticklabels(pivot_df.index, rotation=45, ha='right', fontsize=8)
-        self.daily_spendings_stat_ax.legend()
+            # Formatting
+            self.daily_spendings_stat_ax.set_xticks(range(len(pivot_df.index)))
+            self.daily_spendings_stat_ax.set_xticklabels(pivot_df.index, rotation=45, ha='right', fontsize=8)
+            self.daily_spendings_stat_ax.legend()
 
         self.daily_spendings_stat_canvas.draw()
 
@@ -466,6 +466,7 @@ class Manager:
         return data
 
     def get_current_month_data(self, sheet: Worksheet):
+        self.row_nmb = 1
         data = []
         self.headings = [cell.value for cell in sheet[1][:5]]
         for row in sheet.iter_rows(min_row=2, max_row=sheet.max_row, max_col=5, values_only=True):

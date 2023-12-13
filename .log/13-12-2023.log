@@ -1,2 +1,495 @@
 13/12/2023 17:26:57 - Saving workbook 2023.xlsx
 13/12/2023 17:27:07 - Saving workbook 2023.xlsx
+13/12/2023 18:32:06 - Saving workbook 2023.xlsx
+13/12/2023 18:52:06 - Saving workbook 2023.xlsx
+13/12/2023 18:52:10 - Deleting {'text': '', 'image': '', 'values': ['13/12/2023', 1, 'vxc', 'aaaaa', 'Income'], 'open': 0, 'tags': ''}
+13/12/2023 18:52:10 - Saving workbook 2023.xlsx
+13/12/2023 18:52:29 - Saving workbook 2023.xlsx
+13/12/2023 18:52:32 - Deleting {'text': '', 'image': '', 'values': ['13/12/2023', 1, 'vxc', 'aaaaa', 'Income'], 'open': 0, 'tags': ''}
+13/12/2023 18:52:32 - Saving workbook 2023.xlsx
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "C:\Users\luisr\AppData\Local\Programs\Python\Python311\Lib\tkinter\__init__.py", line 1948, in __call__
+    return self.func(*args)
+           ^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\Manager.py", line 228, in update_expenses
+    self.save_workbook() # save information when changing worksheets
+    ^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\Manager.py", line 366, in save_workbook
+    self.current_workbook.save(self.folder_path + self.year_boxlist.get())
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\openpyxl\workbook\workbook.py", line 386, in save
+    save_workbook(self, filename)
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\openpyxl\writer\excel.py", line 291, in save_workbook
+    archive = ZipFile(filename, 'w', ZIP_DEFLATED, allowZip64=True)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luisr\AppData\Local\Programs\Python\Python311\Lib\zipfile.py", line 1281, in __init__
+    self.fp = io.open(file, filemode)
+              ^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: './expenses/2023.xlsx'
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "C:\Users\luisr\AppData\Local\Programs\Python\Python311\Lib\tkinter\__init__.py", line 1948, in __call__
+    return self.func(*args)
+           ^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\Manager.py", line 228, in update_expenses
+    self.save_workbook() # save information when changing worksheets
+    ^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\Manager.py", line 366, in save_workbook
+    self.current_workbook.save(self.folder_path + self.year_boxlist.get())
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\openpyxl\workbook\workbook.py", line 386, in save
+    save_workbook(self, filename)
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\openpyxl\writer\excel.py", line 291, in save_workbook
+    archive = ZipFile(filename, 'w', ZIP_DEFLATED, allowZip64=True)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luisr\AppData\Local\Programs\Python\Python311\Lib\zipfile.py", line 1281, in __init__
+    self.fp = io.open(file, filemode)
+              ^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: './expenses/2023.xlsx'
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "C:\Users\luisr\AppData\Local\Programs\Python\Python311\Lib\tkinter\__init__.py", line 1948, in __call__
+    return self.func(*args)
+           ^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\Manager.py", line 228, in update_expenses
+    self.save_workbook() # save information when changing worksheets
+    ^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\Manager.py", line 366, in save_workbook
+    self.current_workbook.save(self.folder_path + self.year_boxlist.get())
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\openpyxl\workbook\workbook.py", line 386, in save
+    save_workbook(self, filename)
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\openpyxl\writer\excel.py", line 291, in save_workbook
+    archive = ZipFile(filename, 'w', ZIP_DEFLATED, allowZip64=True)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luisr\AppData\Local\Programs\Python\Python311\Lib\zipfile.py", line 1281, in __init__
+    self.fp = io.open(file, filemode)
+              ^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: './expenses/2023.xlsx'
+13/12/2023 18:53:40 - Saving workbook 2023.xlsx
+13/12/2023 18:53:42 - Saving workbook 2023.xlsx
+13/12/2023 18:53:43 - Saving workbook 2023.xlsx
+13/12/2023 18:53:48 - Saving workbook 2023.xlsx
+13/12/2023 18:53:52 - Deleting {'text': '', 'image': '', 'values': ['21/12/2023', 23, 'adf', 'fbv', 'Income'], 'open': 0, 'tags': ''}
+13/12/2023 18:53:52 - Deleting {'text': '', 'image': '', 'values': ['13/12/2023', -30, 'ora', 'essa', 'Education'], 'open': 0, 'tags': ''}
+13/12/2023 18:53:52 - Deleting {'text': '', 'image': '', 'values': ['13/12/2023', 1, 'vxc', 'aaaaa', 'Income'], 'open': 0, 'tags': ''}
+13/12/2023 18:53:52 - Deleting {'text': '', 'image': '', 'values': ['13/12/2023', -21, 'laksd', 'sdgajf', 'Income'], 'open': 0, 'tags': ''}
+13/12/2023 18:53:52 - Saving workbook 2023.xlsx
+13/12/2023 18:53:55 - Deleting {'text': '', 'image': '', 'values': ['13/12/2023', -30, 'ora', 'essa', 'Education'], 'open': 0, 'tags': ''}
+13/12/2023 18:53:55 - Deleting {'text': '', 'image': '', 'values': ['13/12/2023', 1, 'vxc', 'aaaaa', 'Income'], 'open': 0, 'tags': ''}
+13/12/2023 18:53:55 - Deleting {'text': '', 'image': '', 'values': ['13/12/2023', -21, 'laksd', 'sdgajf', 'Income'], 'open': 0, 'tags': ''}
+13/12/2023 18:53:55 - Saving workbook 2023.xlsx
+13/12/2023 18:53:58 - Deleting {'text': '', 'image': '', 'values': ['13/12/2023', 1, 'vxc', 'aaaaa', 'Income'], 'open': 0, 'tags': ''}
+13/12/2023 18:53:58 - Deleting {'text': '', 'image': '', 'values': ['13/12/2023', -21, 'laksd', 'sdgajf', 'Income'], 'open': 0, 'tags': ''}
+13/12/2023 18:53:58 - Saving workbook 2023.xlsx
+13/12/2023 18:54:01 - Deleting {'text': '', 'image': '', 'values': ['13/12/2023', -21, 'laksd', 'sdgajf', 'Income'], 'open': 0, 'tags': ''}
+13/12/2023 18:54:01 - Saving workbook 2023.xlsx
+13/12/2023 18:54:03 - Deleting {'text': '', 'image': '', 'values': ['13/12/2023', -21, 'laksd', 'sdgajf', 'Income'], 'open': 0, 'tags': ''}
+13/12/2023 18:54:03 - Saving workbook 2023.xlsx
+13/12/2023 18:54:06 - Deleting {'text': '', 'image': '', 'values': ['13/12/2023', -21, 'laksd', 'sdgajf', 'Income'], 'open': 0, 'tags': ''}
+13/12/2023 18:54:06 - Saving workbook 2023.xlsx
+No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+13/12/2023 18:54:18 - Saving workbook 2023.xlsx
+13/12/2023 18:54:20 - Deleting {'text': '', 'image': '', 'values': ['13/12/2023', -21, 'laksd', 'sdgajf', 'Income'], 'open': 0, 'tags': ''}
+13/12/2023 18:54:20 - Saving workbook 2023.xlsx
+No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\pandas\core\indexes\base.py", line 3790, in get_loc
+    return self._engine.get_loc(casted_key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "index.pyx", line 152, in pandas._libs.index.IndexEngine.get_loc
+  File "index.pyx", line 181, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas\_libs\hashtable_class_helper.pxi", line 7080, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas\_libs\hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'AMMOUNT'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\luisr\AppData\Local\Programs\Python\Python311\Lib\tkinter\__init__.py", line 1948, in __call__
+    return self.func(*args)
+           ^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\AddData.py", line 83, in add_data
+    self.manager.add_row_to_current_sheet(self.new_row)
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\Manager.py", line 258, in add_row_to_current_sheet
+    self.update_expenses()
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\Manager.py", line 234, in update_expenses
+    self.update_all_stats()
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\Manager.py", line 406, in update_all_stats
+    self.update_categoryStats()
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\Manager.py", line 414, in update_categoryStats
+    df['AMMOUNT'] = df['AMMOUNT'].abs()
+                    ~~^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\pandas\core\frame.py", line 3893, in __getitem__
+    indexer = self.columns.get_loc(key)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\pandas\core\indexes\base.py", line 3797, in get_loc
+    raise KeyError(key) from err
+KeyError: 'AMMOUNT'
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\pandas\core\indexes\base.py", line 3790, in get_loc
+    return self._engine.get_loc(casted_key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "index.pyx", line 152, in pandas._libs.index.IndexEngine.get_loc
+  File "index.pyx", line 181, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas\_libs\hashtable_class_helper.pxi", line 7080, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas\_libs\hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'AMMOUNT'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\luisr\AppData\Local\Programs\Python\Python311\Lib\tkinter\__init__.py", line 1948, in __call__
+    return self.func(*args)
+           ^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\AddData.py", line 83, in add_data
+    self.manager.add_row_to_current_sheet(self.new_row)
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\Manager.py", line 258, in add_row_to_current_sheet
+    self.update_expenses()
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\Manager.py", line 234, in update_expenses
+    self.update_all_stats()
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\Manager.py", line 406, in update_all_stats
+    self.update_categoryStats()
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\Manager.py", line 414, in update_categoryStats
+    df['AMMOUNT'] = df['AMMOUNT'].abs()
+                    ~~^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\pandas\core\frame.py", line 3893, in __getitem__
+    indexer = self.columns.get_loc(key)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\pandas\core\indexes\base.py", line 3797, in get_loc
+    raise KeyError(key) from err
+KeyError: 'AMMOUNT'
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "C:\Users\luisr\AppData\Local\Programs\Python\Python311\Lib\tkinter\__init__.py", line 1948, in __call__
+    return self.func(*args)
+           ^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\Manager.py", line 196, in <lambda>
+    self.add_button = tk.Button(self.excel_explorerFrame, text="Add Expense", bg='firebrick2', font=('Arial', 9), width=13, command=lambda: self.add_dataToExcel('expense'))
+                                                                                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\Manager.py", line 264, in add_dataToExcel
+    add_frame.run()
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\AddData.py", line 95, in run
+    self.root.mainloop()
+  File "C:\Users\luisr\AppData\Local\Programs\Python\Python311\Lib\tkinter\__init__.py", line 1485, in mainloop
+    self.tk.mainloop(n)
+KeyboardInterrupt
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\pandas\core\indexes\base.py", line 3790, in get_loc
+    return self._engine.get_loc(casted_key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "index.pyx", line 152, in pandas._libs.index.IndexEngine.get_loc
+  File "index.pyx", line 181, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas\_libs\hashtable_class_helper.pxi", line 7080, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas\_libs\hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'AMMOUNT'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\luisr\AppData\Local\Programs\Python\Python311\Lib\tkinter\__init__.py", line 1948, in __call__
+    return self.func(*args)
+           ^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\Manager.py", line 234, in update_expenses
+    self.update_all_stats()
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\Manager.py", line 406, in update_all_stats
+    self.update_categoryStats()
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\Manager.py", line 414, in update_categoryStats
+    df['AMMOUNT'] = df['AMMOUNT'].abs()
+                    ~~^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\pandas\core\frame.py", line 3893, in __getitem__
+    indexer = self.columns.get_loc(key)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\pandas\core\indexes\base.py", line 3797, in get_loc
+    raise KeyError(key) from err
+KeyError: 'AMMOUNT'
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\pandas\core\indexes\base.py", line 3790, in get_loc
+    return self._engine.get_loc(casted_key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "index.pyx", line 152, in pandas._libs.index.IndexEngine.get_loc
+  File "index.pyx", line 181, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas\_libs\hashtable_class_helper.pxi", line 7080, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas\_libs\hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'AMMOUNT'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\luisr\AppData\Local\Programs\Python\Python311\Lib\tkinter\__init__.py", line 1948, in __call__
+    return self.func(*args)
+           ^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\Manager.py", line 234, in update_expenses
+    self.update_all_stats()
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\Manager.py", line 406, in update_all_stats
+    self.update_categoryStats()
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\Manager.py", line 414, in update_categoryStats
+    df['AMMOUNT'] = df['AMMOUNT'].abs()
+                    ~~^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\pandas\core\frame.py", line 3893, in __getitem__
+    indexer = self.columns.get_loc(key)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\pandas\core\indexes\base.py", line 3797, in get_loc
+    raise KeyError(key) from err
+KeyError: 'AMMOUNT'
+13/12/2023 18:55:07 - Saving workbook 2023.xlsx
+13/12/2023 18:55:08 - Saving workbook 2023.xlsx
+13/12/2023 18:55:09 - Saving workbook 2023.xlsx
+False
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\pandas\core\indexes\base.py", line 3790, in get_loc
+    return self._engine.get_loc(casted_key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "index.pyx", line 152, in pandas._libs.index.IndexEngine.get_loc
+  File "index.pyx", line 181, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas\_libs\hashtable_class_helper.pxi", line 7080, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas\_libs\hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'AMMOUNT'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\luisr\AppData\Local\Programs\Python\Python311\Lib\tkinter\__init__.py", line 1948, in __call__
+    return self.func(*args)
+           ^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\Manager.py", line 234, in update_expenses
+    self.update_all_stats()
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\Manager.py", line 406, in update_all_stats
+    self.update_categoryStats()
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\Manager.py", line 415, in update_categoryStats
+    df['AMMOUNT'] = df['AMMOUNT'].abs()
+                    ~~^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\pandas\core\frame.py", line 3893, in __getitem__
+    indexer = self.columns.get_loc(key)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\pandas\core\indexes\base.py", line 3797, in get_loc
+    raise KeyError(key) from err
+KeyError: 'AMMOUNT'
+[]
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\pandas\core\indexes\base.py", line 3790, in get_loc
+    return self._engine.get_loc(casted_key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "index.pyx", line 152, in pandas._libs.index.IndexEngine.get_loc
+  File "index.pyx", line 181, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas\_libs\hashtable_class_helper.pxi", line 7080, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas\_libs\hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'AMMOUNT'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\luisr\AppData\Local\Programs\Python\Python311\Lib\tkinter\__init__.py", line 1948, in __call__
+    return self.func(*args)
+           ^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\Manager.py", line 234, in update_expenses
+    self.update_all_stats()
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\Manager.py", line 406, in update_all_stats
+    self.update_categoryStats()
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\Manager.py", line 415, in update_categoryStats
+    df['AMMOUNT'] = df['AMMOUNT'].abs()
+                    ~~^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\pandas\core\frame.py", line 3893, in __getitem__
+    indexer = self.columns.get_loc(key)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\pandas\core\indexes\base.py", line 3797, in get_loc
+    raise KeyError(key) from err
+KeyError: 'AMMOUNT'
+13/12/2023 18:57:04 - Saving workbook 2023.xlsx
+[]
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\pandas\core\indexes\base.py", line 3790, in get_loc
+    return self._engine.get_loc(casted_key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "index.pyx", line 152, in pandas._libs.index.IndexEngine.get_loc
+  File "index.pyx", line 181, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas\_libs\hashtable_class_helper.pxi", line 7080, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas\_libs\hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'AMMOUNT'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\luisr\AppData\Local\Programs\Python\Python311\Lib\tkinter\__init__.py", line 1948, in __call__
+    return self.func(*args)
+           ^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\Manager.py", line 234, in update_expenses
+    self.update_all_stats()
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\Manager.py", line 406, in update_all_stats
+    self.update_categoryStats()
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\Manager.py", line 415, in update_categoryStats
+    df['AMMOUNT'] = df['AMMOUNT'].abs()
+                    ~~^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\pandas\core\frame.py", line 3893, in __getitem__
+    indexer = self.columns.get_loc(key)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\pandas\core\indexes\base.py", line 3797, in get_loc
+    raise KeyError(key) from err
+KeyError: 'AMMOUNT'
+[]
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\pandas\core\indexes\base.py", line 3790, in get_loc
+    return self._engine.get_loc(casted_key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "index.pyx", line 152, in pandas._libs.index.IndexEngine.get_loc
+  File "index.pyx", line 181, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas\_libs\hashtable_class_helper.pxi", line 7080, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas\_libs\hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'AMMOUNT'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\luisr\AppData\Local\Programs\Python\Python311\Lib\tkinter\__init__.py", line 1948, in __call__
+    return self.func(*args)
+           ^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\Manager.py", line 234, in update_expenses
+    self.update_all_stats()
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\Manager.py", line 406, in update_all_stats
+    self.update_categoryStats()
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\Manager.py", line 415, in update_categoryStats
+    df['AMMOUNT'] = df['AMMOUNT'].abs()
+                    ~~^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\pandas\core\frame.py", line 3893, in __getitem__
+    indexer = self.columns.get_loc(key)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\pandas\core\indexes\base.py", line 3797, in get_loc
+    raise KeyError(key) from err
+KeyError: 'AMMOUNT'
+[('25/10/2023', -89.57, 'PAYPAYUE INST', 'Prenda pai (Mi TV Stick) + Relógio Smart Band', 'Shopping'), ('25/10/2023', 89.57, 'PAYPAYUE INST', 'Prenda pai (Mi TV Stick) + Relógio Smart Band', 'Income'), ('26/10/2023', 73.17, 'WORTEN-EQUIPAM', 'Cadeira escritório', 'Food'), ('26/10/2023', 20.23, 'HIPAY SAS', 'Temu - Crocs + Prenda Inês + Aparelho para a aparelhagem', 'Income'), ('27/10/2023', 30, 'CXDOL', 'KapaHemps - Weed', 'Food'), ('29/10/2023', -11, 'MARCO CONSTANT', 'Saída com os boys (Alex e Dani)', 'Leisure'), ('30/10/2023', -12.74, 'HIPAY SAS', 'Games - Battlefield 1 Premium', 'Leisure'), ('30/10/2023', 12.74, 'HIPAY SAS', 'Games - Battlefield 1 Premium', 'Food'), ('04/11/2023', 13.6, 'TIAN TIAN', 'Almoço com a Inês', 'Food'), ('08/11/2023', -12.5, 'CP COMBOIOS PO', 'Comboio Castro - Lisboa', 'Travel'), ('08/11/2023', 12.5, 'CP COMBOIOS PO', 'Comboio Castro - Lisboa', 'Food'), ('10/11/2023', 2.15, 'ANJOS', 'Cartão + passagem Metro', 'Food'), ('11/11/2023', -1.65, 'ANJOS', 'Cartão + passagem Metro', 'Travel'), ('11/11/2023', 1.65, 'ANJOS', 'Cartão + passagem Metro', 'Food'), ('12/11/2023', -36.36, 'MBWAY 969xxx306', 'Casa para PDA - Sevilha', 'Leisure'), ('14/11/2023', -5.99, 'C.DEB UBER', 'Uber - Lisboa', 'Travel'), ('14/11/2023', 5.99, 'C.DEB UBER', 'Uber - Lisboa', 'Income'), ('19/11/2023', 50, 'MBWAY 963xxx619', 'Psicóloga', 'Food'), ('21/11/2023', 40, 'CXDOL', 'Trading 212 - Intel - 10€ na plataforma', 'Food'), ('22/11/2023', 50, 'CXDOL', 'KapaHemps - Weed', 'Food'), ('22/11/2023', 11, 'MEO TMN', 'Carregar o telemóvel', 'Food')]
+[]
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\pandas\core\indexes\base.py", line 3790, in get_loc
+    return self._engine.get_loc(casted_key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "index.pyx", line 152, in pandas._libs.index.IndexEngine.get_loc
+  File "index.pyx", line 181, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas\_libs\hashtable_class_helper.pxi", line 7080, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas\_libs\hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'AMMOUNT'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\luisr\AppData\Local\Programs\Python\Python311\Lib\tkinter\__init__.py", line 1948, in __call__
+    return self.func(*args)
+           ^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\Manager.py", line 234, in update_expenses
+    self.update_all_stats()
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\Manager.py", line 406, in update_all_stats
+    self.update_categoryStats()
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\Manager.py", line 415, in update_categoryStats
+    df['AMMOUNT'] = df['AMMOUNT'].abs()
+                    ~~^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\pandas\core\frame.py", line 3893, in __getitem__
+    indexer = self.columns.get_loc(key)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\pandas\core\indexes\base.py", line 3797, in get_loc
+    raise KeyError(key) from err
+KeyError: 'AMMOUNT'
+13/12/2023 18:58:55 - Saving workbook 2023.xlsx
+13/12/2023 18:58:56 - Saving workbook 2023.xlsx
+13/12/2023 18:58:57 - Saving workbook 2023.xlsx
+13/12/2023 18:58:59 - Saving workbook 2023.xlsx
+[]
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\pandas\core\indexes\base.py", line 3790, in get_loc
+    return self._engine.get_loc(casted_key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "index.pyx", line 152, in pandas._libs.index.IndexEngine.get_loc
+  File "index.pyx", line 181, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas\_libs\hashtable_class_helper.pxi", line 7080, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas\_libs\hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'AMMOUNT'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\luisr\AppData\Local\Programs\Python\Python311\Lib\tkinter\__init__.py", line 1948, in __call__
+    return self.func(*args)
+           ^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\Manager.py", line 234, in update_expenses
+    self.update_all_stats()
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\Manager.py", line 406, in update_all_stats
+    self.update_categoryStats()
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\Manager.py", line 415, in update_categoryStats
+    df['AMMOUNT'] = df['AMMOUNT'].abs()
+                    ~~^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\pandas\core\frame.py", line 3893, in __getitem__
+    indexer = self.columns.get_loc(key)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\pandas\core\indexes\base.py", line 3797, in get_loc
+    raise KeyError(key) from err
+KeyError: 'AMMOUNT'
+13/12/2023 18:59:13 - Saving workbook 2023.xlsx
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\pandas\core\indexes\base.py", line 3790, in get_loc
+    return self._engine.get_loc(casted_key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "index.pyx", line 152, in pandas._libs.index.IndexEngine.get_loc
+  File "index.pyx", line 181, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas\_libs\hashtable_class_helper.pxi", line 7080, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas\_libs\hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'AMMOUNT'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\luisr\AppData\Local\Programs\Python\Python311\Lib\tkinter\__init__.py", line 1948, in __call__
+    return self.func(*args)
+           ^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\Manager.py", line 234, in update_expenses
+    self.update_all_stats()
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\Manager.py", line 406, in update_all_stats
+    self.update_categoryStats()
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\Manager.py", line 414, in update_categoryStats
+    df['AMMOUNT'] = df['AMMOUNT'].abs()
+                    ~~^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\pandas\core\frame.py", line 3893, in __getitem__
+    indexer = self.columns.get_loc(key)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\pandas\core\indexes\base.py", line 3797, in get_loc
+    raise KeyError(key) from err
+KeyError: 'AMMOUNT'
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\pandas\core\indexes\base.py", line 3790, in get_loc
+    return self._engine.get_loc(casted_key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "index.pyx", line 152, in pandas._libs.index.IndexEngine.get_loc
+  File "index.pyx", line 181, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas\_libs\hashtable_class_helper.pxi", line 7080, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas\_libs\hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'AMMOUNT'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\luisr\AppData\Local\Programs\Python\Python311\Lib\tkinter\__init__.py", line 1948, in __call__
+    return self.func(*args)
+           ^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\Manager.py", line 234, in update_expenses
+    self.update_all_stats()
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\Manager.py", line 406, in update_all_stats
+    self.update_categoryStats()
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\Manager.py", line 414, in update_categoryStats
+    df['AMMOUNT'] = df['AMMOUNT'].abs()
+                    ~~^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\pandas\core\frame.py", line 3893, in __getitem__
+    indexer = self.columns.get_loc(key)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\luisr\OneDrive\Área de Trabalho\Projetos\Expense Manager\.venv\Lib\site-packages\pandas\core\indexes\base.py", line 3797, in get_loc
+    raise KeyError(key) from err
+KeyError: 'AMMOUNT'
+13/12/2023 19:01:57 - Saving workbook 2023.xlsx
+13/12/2023 19:01:58 - Saving workbook 2023.xlsx
+13/12/2023 19:01:59 - Saving workbook 2023.xlsx
