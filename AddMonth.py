@@ -65,9 +65,9 @@ class AddMonth:
                 'init_date': init_date,
                 'init_ammount': float(init_ammount)
             }
-            self.manager.current_sheet = self.manager.workbook.create_sheet()
+            self.manager.current_sheet = self.manager.current_workbook.create_sheet()
             self.manager.create_worksheet(info)
-            self.manager.update_sheets(None, index=self.manager.workbook.index(self.manager.workbook.get_sheet_by_name(month_name)))
+            self.manager.update_sheets(None, index=self.manager.current_workbook.index(self.manager.current_workbook.get_sheet_by_name(month_name)))
             # self.manager.month_boxlist.current(self.manager.workbook.index(self.manager.workbook.get_sheet_by_name(month_name)))
             self.on_closing()
 

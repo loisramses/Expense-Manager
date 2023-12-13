@@ -2,6 +2,7 @@ import matplotlib.figure as fig
 import openpyxl as xlrw
 import tkinter as tk
 import pandas as pd
+import numpy as np
 import mplcursors
 import os
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
@@ -66,8 +67,8 @@ class Manager:
         info['year_name'] = new_file_name
 
         # create a new workbook, a new sheet and save it
-        self.workbook = xlrw.Workbook()
-        self.current_sheet = self.workbook.active
+        self.current_workbook = xlrw.Workbook()
+        self.current_sheet = self.current_workbook.active
         self.create_worksheet(info)
 
         # update workbook list
@@ -75,7 +76,7 @@ class Manager:
         self.year_boxlist.config(values=self.books_names)
         self.year_boxlist.current(self.books_names.index(new_file_name))
 
-        self.update_sheets(None)
+        self.update_sheets()
 
     def add_year(self):
         self.perform_op()
@@ -93,7 +94,7 @@ class Manager:
             self.year_boxlist.config(values=self.books_names)
             self.year_boxlist.current(0)
 
-            self.update_sheets(None)
+            self.update_sheets()
 
     def create_worksheet(self, info):
         self.add_log(f'Creating worksheet "{info["month_name"]}" with initial date "{info["init_date"]}" and initial amount "{info["init_ammount"]}" on current workbook "{info["year_name"]}"')
@@ -135,7 +136,7 @@ class Manager:
         self.current_sheet['H7'] = '=SUM(B:B)'
         self.current_sheet['H7'].number_format = self.ammount_format_str
 
-        self.workbook.save(self.folder_path + info['year_name'])
+        self.current_workbook.save(self.folder_path + info['year_name'])
 
     def add_month(self):
         self.perform_op()
@@ -162,9 +163,9 @@ class Manager:
         month = self.month_boxlist.get()
         if messagebox.askyesno("Confirm", f"Are you sure you want to delete {month}?"):
             self.add_log(f'Deleting {month}')
-            self.workbook.remove(self.current_sheet)
+            self.current_workbook.remove(self.current_sheet)
             self.save_workbook()
-            self.update_sheets(None)
+            self.update_sheets()
 
     def setup_excelExplorerFrame(self):
         self.books_names = os.listdir(self.folder_path)
@@ -173,7 +174,7 @@ class Manager:
 
         self.year_boxlist = ttk.Combobox(self.excel_explorerFrame, value=self.books_names, state='readonly')
         self.year_boxlist.current(0)
-        self.update_sheets(None)
+        self.update_sheets()
         self.year_boxlist.grid(row=0, column=0, padx=5, pady=5, sticky=tk.EW)
         self.year_boxlist.bind("<<ComboboxSelected>>", self.update_sheets)
 
@@ -184,7 +185,7 @@ class Manager:
 
         # self.headings = ["DATE", "AMMOUNT", "PURPOSE", "DESCRIPTION", "CATEGORY"]
 
-        self.update_expenses(None)
+        self.update_expenses()
         self.expense_treeList = ttk.Treeview(self.excel_explorerFrame, columns=self.headings, show='headings')
         for i in range(0, 5): self.expense_treeList.column(i, anchor=tk.CENTER)
         for col in self.headings: self.expense_treeList.heading(col, text=col)
@@ -209,19 +210,19 @@ class Manager:
 
         self.excel_explorerFrame.pack()
 
-    def update_sheets(self, event, index=0):
+    def update_sheets(self, event=None, index=0):
         # close the previous book
         if hasattr(self, 'workbook'):
-            self.workbook.close()
+            self.current_workbook.close()
 
-        self.workbook = xlrw.load_workbook(self.folder_path + self.year_boxlist.get())
-        self.sheet_names = self.workbook.sheetnames
+        self.current_workbook = xlrw.load_workbook(self.folder_path + self.year_boxlist.get())
+        self.sheet_names = self.current_workbook.sheetnames
         if hasattr(self, 'month_boxlist'):
             self.month_boxlist.config(value=self.sheet_names)
             self.month_boxlist.current(index)
-            self.update_expenses(None)
+            self.update_expenses()
 
-    def update_expenses(self, event):
+    def update_expenses(self, event=None):
         self.row_nmb = 0
         if hasattr(self, 'current_sheet'):
             self.save_workbook() # save information when changing worksheets
@@ -319,12 +320,12 @@ class Manager:
                 self.expense_treeList.delete(row)
                 self.row_nmb -= 1
 
-            self.update_expenses(None)
+            self.update_expenses()
             self.populate_expensesTree()
             self.save_workbook()
 
     def get_current_sheet(self):
-        sheet = self.workbook[self.month_boxlist.get()]
+        sheet = self.current_workbook[self.month_boxlist.get()]
         self.current_sheet_start_date = sheet['H1'].value
         self.current_sheet_end_date = sheet['H2'].value
         self.current_sheet_initial_ammount = sheet['H4'].value
@@ -362,7 +363,7 @@ class Manager:
         self.current_sheet['H7'] = '=SUM(B:B)'
         self.current_sheet['H7'].number_format = self.ammount_format_str
 
-        self.workbook.save(self.folder_path + self.year_boxlist.get())
+        self.current_workbook.save(self.folder_path + self.year_boxlist.get())
 
     def setup_statisticsFrame(self):
         self.statisticsFrame = tk.Frame(self.root)
@@ -375,12 +376,12 @@ class Manager:
         self.gain_spendings_stat_boxlist = ttk.Combobox(self.statisticsFrame, value=['Current Month', 'Current Year'], state='readonly')
         self.gain_spendings_stat_boxlist.current(0)
         self.gain_spendings_stat_boxlist.grid(row=0, column=1,padx=5, pady=5, sticky=tk.EW)
-        # self.gain_spendings_stat_boxlist.bind("<<ComboboxSelected>>", self.update_gain_spendingsStats)
+        self.gain_spendings_stat_boxlist.bind("<<ComboboxSelected>>", self.update_gain_spendingsStats)
 
         self.daily_spendings_stat_boxlist = ttk.Combobox(self.statisticsFrame, value=['Current Month', 'Current Year'], state='readonly')
         self.daily_spendings_stat_boxlist.current(0)
         self.daily_spendings_stat_boxlist.grid(row=0, column=2,padx=5, pady=5, sticky=tk.EW)
-        # self.daily_spendings_stat_boxlist.bind("<<ComboboxSelected>>", self.update_daily_spendingsStats)
+        self.daily_spendings_stat_boxlist.bind("<<ComboboxSelected>>", self.update_daily_spendingsStats)
 
         self.category_stat_fig = fig.Figure(figsize=(3.5, 3.5))
         self.category_stat_ax = self.category_stat_fig.add_subplot()
@@ -406,21 +407,57 @@ class Manager:
         self.update_gain_spendingsStats()
         self.update_daily_spendingsStats()
 
-    def update_categoryStats(self):
-        df = pd.DataFrame(self.get_current_month_data(self.current_sheet), columns=self.headings)
+    def update_categoryStats(self, event=None):
+        if (self.category_stat_boxlist.current() == 0): data = self.get_current_month_data(self.current_sheet)
+        else: data = self.get_current_year_data(self.current_workbook)
+        df = pd.DataFrame(data, columns=self.headings)
         df['AMMOUNT'] = df['AMMOUNT'].abs()
-        cat_totals = df.groupby('CATEGORY').sum()
-        # print(cat_totals['AMMOUNT'])
-        self.category_stat_ax.pie(cat_totals['AMMOUNT'], labels=cat_totals.index, autopct='%.2f%%')
-        # print(cat_totals.index)
-        # print(self.category_stat_boxlist.get())
-        # pass
+        cat_totals = df.groupby('CATEGORY').sum().round(2)
+        self.category_stat_ax.clear()
+        _, _, autotexts = self.category_stat_ax.pie(cat_totals['AMMOUNT'], labels=cat_totals.index, autopct='%.2f%%')
+        for i, value in enumerate(cat_totals['AMMOUNT']):
+            autotexts[i].set_text(str(value))
+        self.category_stat_canvas.draw()
 
-    def update_gain_spendingsStats(self):
-        pass
+    def update_gain_spendingsStats(self, event=None):
+        if (self.gain_spendings_stat_boxlist.current() == 0): data = self.get_current_month_data(self.current_sheet)
+        else: data = self.get_current_year_data(self.current_workbook)
+        df = pd.DataFrame(data, columns=self.headings)
+        df['GROUP'] = df['CATEGORY'].apply(lambda x: 'Income' if x == 'Income' else 'Expenses')
+        df['AMMOUNT'] = df['AMMOUNT'].abs()
+        cat_totals = df.groupby('GROUP').sum().round(2)
+        self.gain_spendings_stat_ax.clear()
+        _, _, autotexts = self.gain_spendings_stat_ax.pie(cat_totals['AMMOUNT'], labels=cat_totals.index, autopct='%.2f%%')
+        for i, value in enumerate(cat_totals['AMMOUNT']):
+            autotexts[i].set_text(value)
+        self.gain_spendings_stat_canvas.draw()
 
-    def update_daily_spendingsStats(self):
-        pass
+    def update_daily_spendingsStats(self, event=None):
+        if (self.daily_spendings_stat_boxlist.current() == 0): data = self.get_current_month_data(self.current_sheet)
+        else: data = self.get_current_year_data(self.current_workbook)
+        df = pd.DataFrame(data, columns=self.headings)
+        df['DATE'] = pd.to_datetime(df['DATE'], format='%d/%m/%Y')
+        df['DATE'] = df['DATE'].dt.strftime('%d/%m')
+        df['AMMOUNT'] = df['AMMOUNT'].abs()
+        df['GROUP'] = df['CATEGORY'].apply(lambda x: 'Income' if x == 'Income' else 'Expenses')
+        pivot_df = df.pivot_table(index='DATE', columns='GROUP', values='AMMOUNT', aggfunc='sum', fill_value=0)
+
+        bar_width = 0.4
+        bar_pos = np.arange(len(pivot_df.index))
+        self.daily_spendings_stat_ax.clear()
+        if 'Expenses' in pivot_df.columns:
+            expenses = pivot_df['Expenses']
+            self.daily_spendings_stat_ax.bar(bar_pos - bar_width/2, expenses, width=bar_width, label='Expenses')
+        if 'Income' in pivot_df.columns:
+            income = pivot_df['Income']
+            self.daily_spendings_stat_ax.bar(bar_pos + bar_width/2, income, width=bar_width, label='Income')
+
+        # Formatting
+        self.daily_spendings_stat_ax.set_xticks(range(len(pivot_df.index)))
+        self.daily_spendings_stat_ax.set_xticklabels(pivot_df.index, rotation=45, ha='right', fontsize=8)
+        self.daily_spendings_stat_ax.legend()
+
+        self.daily_spendings_stat_canvas.draw()
 
     def get_current_year_data(self, workbook: Workbook):
         data = []
@@ -447,7 +484,7 @@ class Manager:
 
     def on_closing(self):
         if not self.performing_operation:
-            self.workbook.close()
+            self.current_workbook.close()
             self.stop()
             self.root.destroy()
             self.print_logs()
@@ -474,4 +511,4 @@ import AddMonth as addMonth
 import AddData as addFrame
 import AddYear as addYear
 
-Manager().run()
+# Manager().run()
