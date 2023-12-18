@@ -72,7 +72,7 @@ class Manager:
         self.create_worksheet(info)
 
         # update workbook list
-        self.books_names = os.listdir('./expenses')
+        self.books_names = os.listdir(self.folder_path)
         self.year_boxlist.config(values=self.books_names)
         self.year_boxlist.current(self.books_names.index(new_file_name))
 
@@ -90,7 +90,7 @@ class Manager:
             os.remove(self.folder_path + year)
 
             # update workbook list
-            self.books_names = os.listdir('./expenses')
+            self.books_names = os.listdir(self.folder_path)
             self.year_boxlist.config(values=self.books_names)
             self.year_boxlist.current(0)
 
