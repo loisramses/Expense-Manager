@@ -3,7 +3,6 @@ import openpyxl as xlrw
 import tkinter as tk
 import pandas as pd
 import numpy as np
-import mplcursors
 import os
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from openpyxl.worksheet.worksheet import Worksheet
@@ -11,7 +10,6 @@ from openpyxl.workbook.workbook import Workbook
 from openpyxl.styles import Font
 from tkinter import messagebox
 from datetime import datetime
-from datetime import date
 from tkinter import ttk
 
 class Manager:
@@ -31,7 +29,6 @@ class Manager:
         self.date_format_str = 'DD/MM/YYYY'
         self.categories_list = ['Education', 'Food', 'Health', 'Income', 'Investments', 'Leisure', 'Shopping', 'Subscription', 'Transportation', 'Travel', 'Other']
         # self.categories_list = ['Alimentação', 'Compras', 'Educação', 'Investimentos', 'Lazer', 'Saúde', 'Transportes', 'Viagens', 'Outro']
-        mplcursors.cursor(hover=True)
 
         self.setup_menubar()
         self.setup_excelExplorerFrame()
