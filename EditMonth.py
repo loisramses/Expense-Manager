@@ -2,9 +2,7 @@ import tkcalendar as tkCal
 import tkinter as tk
 import Manager as mn
 from tkinter import messagebox
-from datetime import datetime
 from datetime import date
-from tkinter import ttk
 
 class EditMonth:
     def __init__(self, manager: mn.Manager):

@@ -94,14 +94,14 @@ class Manager:
             self.update_sheets()
 
     def create_worksheet(self, info):
-        self.add_log(f'Creating worksheet "{info["month_name"]}" with initial date "{info["init_date"]}" and initial amount "{info["init_ammount"]}" on current workbook "{info["year_name"]}"')
+        self.add_log(f'Creating worksheet "{info["month_name"]}" with initial date "{info["init_date"]}" and initial ammount "{info["init_ammount"]}" on current workbook "{info["year_name"]}"')
 
         self.current_sheet.title = info['month_name']
 
         # insert col tags
         self.current_sheet['A1'] = 'DATE'
         self.current_sheet['A1'].font = self.cell_font
-        self.current_sheet['B1'] = 'AMOUNT'
+        self.current_sheet['B1'] = 'AMMOUNT'
         self.current_sheet['B1'].font = self.cell_font
         self.current_sheet['C1'] = 'PURPOSE'
         self.current_sheet['C1'].font = self.cell_font
@@ -142,13 +142,13 @@ class Manager:
 
     def edit_current_sheet(self, info):
         self.add_log(f'Editing worksheet "{self.month_boxlist.get()}":')
-        self.add_log(f'previous info - start_date: {self.current_sheet_start_date}, end_date: {self.current_sheet_end_date}, initial_amount: {self.current_sheet_initial_ammount}')
+        self.add_log(f'previous info - start_date: {self.current_sheet_start_date}, end_date: {self.current_sheet_end_date}, initial_ammount: {self.current_sheet_initial_ammount}')
 
         # set the updated data for the current sheet
         self.current_sheet_start_date = info['start_date']
         self.current_sheet_end_date = info['end_date']
         self.current_sheet_initial_ammount = info['initial_ammount']
-        self.add_log(f'updated info - start_date: {self.current_sheet_start_date}, end_date: {self.current_sheet_end_date}, initial_amount: {self.current_sheet_initial_ammount}')
+        self.add_log(f'updated info - start_date: {self.current_sheet_start_date}, end_date: {self.current_sheet_end_date}, initial_ammount: {self.current_sheet_initial_ammount}')
         self.save_workbook()
 
     def edit_month(self):
@@ -237,6 +237,7 @@ class Manager:
 
     def add_row_to_current_sheet(self, row):
         # add row to excel
+        self.current_sheet.cell(row=self.row_nmb+1, column=1, value=row[0])
         try:
             self.current_sheet.cell(row=self.row_nmb+1, column=2, value=float(row[1])).number_format = self.ammount_format_str
         except:
